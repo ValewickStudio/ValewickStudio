@@ -525,3 +525,65 @@ main > section:not(:first-child)::before {
   .ambient-orbit, .soundscape-wave-on { animation: none !important; }
   .motion-reveal, .motion-reveal.is-in-view { animation: none !important; }
 }
+
+
+/* Art direction pass: flat surfaces, editorial contrast, consistent motion. */
+:root {
+  --background: #0b0b0a;
+  --foreground: #f4f1e9;
+  --card: #141412;
+  --card-foreground: #f4f1e9;
+  --muted-foreground: #b5b1a7;
+  --border: rgb(244 241 233 / 13%);
+  --primary: #d6c39a;
+  --accent: #d6c39a;
+}
+body { background: #0b0b0a; color: #f4f1e9; }
+.liquid-glass, .glass-nav, .soundscape-control, .hero-stage a.liquid-glass {
+  background: rgb(24 24 22 / 88%);
+  border: 1px solid rgb(244 241 233 / 14%);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 9%), 0 16px 48px rgb(0 0 0 / 28%);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+}
+.liquid-glass::before, .liquid-glass::after { display: none; }
+.liquid-glass:hover, .soundscape-control:hover {
+  border-color: rgb(244 241 233 / 22%);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 12%), 0 18px 52px rgb(0 0 0 / 32%);
+  transform: translateY(-2px);
+}
+.glass-nav { background: rgb(17 17 16 / 88%); }
+.hero-stage {
+  background: #0b0b0a;
+}
+.hero-stage::before {
+  background: radial-gradient(ellipse at center, transparent 38%, rgb(0 0 0 / 28%) 100%);
+}
+.hero-stage::after {
+  border-color: rgb(228 208 165 / 10%);
+  box-shadow: 0 0 0 48px rgb(228 208 165 / 2%), 0 0 0 110px rgb(228 208 165 / 1.5%);
+}
+.hero-stage h2 .italic { color: inherit; font-style: normal; }
+.hero-stage a.liquid-glass { background: rgb(24 24 22 / 88%); border-color: rgb(255 255 255 / 18%); }
+main > section:not(:first-child)::before { background: rgb(221 202 160 / 16%); }
+.scroll-progress { display: none; }
+.ambient-orbit { opacity: .075; filter: blur(100px); }
+.ambient-orbit-one, .ambient-orbit-two { background: rgb(196 164 106 / 32%); }
+.motion-reveal, .motion-reveal.is-in-view { animation: none !important; opacity: 1; transform: none; filter: none; }
+.soundscape-control { background: rgb(20 20 18 / 92%); }
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  main :is(h1, h2, h3, h4) { transition: text-shadow 350ms ease; translate: none; }
+  main :is(h1, h2, h3, h4):hover { text-shadow: 0 0 24px rgb(255 255 255 / 8%); translate: none; }
+  main a, nav a, footer a { transition: color 250ms ease, background-color 250ms ease, border-color 250ms ease; }
+  main a:hover { translate: none; }
+  nav a:hover { filter: none; }
+  footer a:hover { translate: none; }
+  main :is(input, select, textarea):hover { border-color: rgb(255 255 255 / 35%); box-shadow: none; }
+  main button:not(.package-card):hover { filter: none; box-shadow: none; }
+  .package-card, .countdown-cell { transition: background-color 250ms ease, color 250ms ease, box-shadow 250ms ease; }
+  .package-card-0:hover, .package-card-1:hover, .package-card-2:hover, .package-card-3:hover,
+  .countdown-cell-0:hover, .countdown-cell-1:hover, .countdown-cell-2:hover { translate: none; rotate: none; scale: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ambient-orbit, .hero-stage::after { animation: none !important; }
+}
