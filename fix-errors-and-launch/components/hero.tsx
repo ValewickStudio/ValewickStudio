@@ -6,7 +6,7 @@ import { SentientSphere } from "./sentient-sphere"
 import { prefillEnquiry } from "@/lib/enquiry-events"
 import { TrustpilotNote } from "@/components/reviews"
 import { TextType } from "@/components/react-bits/text-type"
-import { FoldText } from "@/components/react-bits/fold-text"
+import { FoldText } from "@/components/react-bits/fold-text"\nimport { ParticleText } from "@/components/react-bits/particle-text"
 
 
 export function Hero() {
@@ -35,9 +35,9 @@ export function Hero() {
           transition={{ duration: 1, delay: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
         >
           <h2 className="font-sans text-5xl font-light leading-[0.98] tracking-[-0.045em] text-balance md:text-7xl lg:text-[6.5rem]">
-            <FoldText text="Digital presence." splitBy="word" stagger={0.045} fontSize="inherit" fontWeight={300} className="font-sans" />
+            <ParticleText text="Digital presence." align="left" fontSize="clamp(2.5rem, 6.5vw, 6.5rem)" fontWeight={300} color="#f4f0e8" scatter={95} gatherDuration={1350} trigger="hover" />
             <br />
-            <FoldText text="Real ambition." splitBy="word" stagger={0.065} fontSize="inherit" fontWeight={300} className="font-sans" />
+            <ParticleText text="Real ambition." align="left" fontSize="clamp(2.5rem, 6.5vw, 6.5rem)" fontWeight={300} color="#f4f0e8" scatter={115} gatherDuration={1450} trigger="hover" />
           </h2>
           <p className="mt-5 min-h-12 max-w-sm font-mono text-xs leading-6 text-muted-foreground"><TextType text={["Websites with purpose.", "Creative that connects.", "Systems that work smarter."]} typingSpeed={48} deletingSpeed={24} pauseDuration={1500} initialDelay={650} /></p><p className="mt-4 max-w-sm font-mono text-[10px] leading-5 tracking-[0.12em] text-white/55">CLEAR SCOPE · RESPONSIVE BUILD · HUMAN SUPPORT</p>
           <a href="#concept" className="liquid-glass mt-6 inline-flex min-h-11 items-center rounded-full border border-white/20 px-5 py-3 font-mono text-[10px] tracking-[0.12em] text-white/85 transition-colors hover:border-white hover:bg-white hover:text-black">EXPLORE THE $50 HOMEPAGE CONCEPT →</a>
