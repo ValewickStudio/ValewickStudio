@@ -2,6 +2,7 @@
 
 import { motion, useReducedMotion } from "framer-motion"
 import { BlurText } from "@/components/react-bits/blur-text"
+import TechText from "@/components/react-bits/tech-text"
 
 const capabilities = ["Distinctive websites", "Campaign creative", "Brand presence", "Business automation"]
 
@@ -14,6 +15,7 @@ export function TechMarquee() {
         <p className="mb-4 font-mono text-xs tracking-[0.3em] text-muted-foreground">09 — ONE CONNECTED DIRECTION</p>
         <h2 className="text-3xl font-light md:text-5xl"><BlurText text="Your brand." delay={60} /> <span className="italic"><BlurText text="Working together." delay={75} direction="top" /></span></h2>
       </motion.div>
+      <div className="mx-auto mb-2 max-w-6xl px-6 md:px-12"><div className="h-[82px] sm:h-[112px] md:h-[138px]"><TechText text="VALEWICK HOUSE" fontWeight={500} fontSize={122} letterSpacing={-0.075} color="#f4f0e8" accentColor="#bcbcb8" reveal="letter" reach={155} softness={0.8} dashLength={3} dashGap={3} specks={9} selection={false} labels={false} draggable={false} sweep speed={0.55} /></div></div>
       {/* Marquee Rows */}
       <div className="brand-marquee overflow-hidden py-6" aria-label={capabilities.join(", ")}>
         <div aria-hidden="true" className="animate-marquee-left flex w-max gap-8">
