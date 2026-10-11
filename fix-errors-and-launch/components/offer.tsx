@@ -115,10 +115,7 @@ export function Demo() {
           <h2 className="text-4xl font-light tracking-tight md:text-6xl"><FoldText text="See the details." splitBy="word" fontSize="inherit" fontWeight={300} className="font-sans" /><br /><span className="italic"><FoldText text="Feel the difference." splitBy="word" fontSize="inherit" fontWeight={300} className="font-sans" /></span></h2>
           <p className="mt-5 max-w-2xl font-mono text-xs leading-6 text-muted-foreground">Explore two independent, moving site demonstrations. These are examples of digital experiences, not client endorsements.</p>
         </motion.div>
-        <DepthCarousel
-          className="mt-8"
-          activeIndex={activeDemo}
-          onChange={(index) => { setActiveDemo(index); setDemoStatus("loading") }}
+        <CardSwap
           items={websiteDemos.map((item, index) => ({
             label: item.label,
             title: item.label,
@@ -127,6 +124,8 @@ export function Demo() {
             category: index === 0 ? "HOSPITALITY / STOREFRONT" : "PRODUCT / DIGITAL SYSTEMS",
             monogram: index === 0 ? "K" : "S",
           }))}
+          activeIndex={activeDemo}
+          onChange={(index) => { setActiveDemo(index); setDemoStatus("loading") }}
         />
         <motion.div key={demo.url} initial={{ opacity: 0, y: reduceMotion ? 0 : 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.55 }} role="tabpanel" id="website-demo-panel" aria-labelledby={`demo-tab-${activeDemo}`} className="liquid-glass spotlight-card glare-hover mt-5 overflow-hidden rounded-2xl p-2 shadow-2xl shadow-black/30 md:p-4">
           <div className="flex items-center gap-2 border-b border-white/10 px-3 pb-3 pt-2"><span className="size-2 rounded-full bg-white/25" /><span className="size-2 rounded-full bg-white/25" /><span className="size-2 rounded-full bg-white/25" /><span className="ml-3 flex-1 truncate rounded-full border border-white/10 bg-black/20 px-4 py-2 font-mono text-[9px] text-muted-foreground">{demo.url.replace("https://", "")}</span><motion.span aria-hidden="true" animate={reduceMotion ? undefined : { opacity: [0.45, 1, 0.45] }} transition={{ duration: 2.4, repeat: Number.POSITIVE_INFINITY }} className="font-mono text-[9px] tracking-wider text-white/50">LIVE DEMO</motion.span></div>
