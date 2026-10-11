@@ -1118,3 +1118,14 @@ section { background-color: transparent; }
   .ambient-backdrop__orb, .ambient-backdrop__ring { animation: none !important; }
   .glare-hover::after { display: none; }
 }
+
+
+/* Final palette pass: keep the atmosphere and glass strictly monochrome. */
+body, html { background: #080909; }
+.glass-nav, .liquid-glass, .hero-stage, .hero-stage a.liquid-glass {
+  background-image: none !important;
+}
+.hero-stage::before, .hero-stage::after {
+  background-image: none !important;
+}
+.review-ticker-mask { mask-image: none; }
