@@ -9,10 +9,8 @@ import { SmoothScroll } from "@/components/smooth-scroll"
 import { Services, Demo, VideoAndCareServices } from "@/components/offer"
 import { WebsitePackages } from "@/components/website-packages"
 import { ProjectEnquiry } from "@/components/project-enquiry"
-import { LoadingIntro } from "@/components/loading-intro"
 import { ReviewCapsule } from "@/components/reviews"
 import { AmbientBackdrop } from "@/components/ambient-backdrop"
-import { ClickSpark } from "@/components/react-bits/click-spark"
 
 export const metadata: Metadata = {
   title: "Websites, Creative & Digital Systems",
@@ -23,11 +21,9 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <SmoothScroll>
-      <ClickSpark className="site-click-spark" sparkColor="#f4f0e8" sparkSize={9} sparkRadius={21} sparkCount={8} duration={480}>
-        <AmbientBackdrop />
-        <LoadingIntro />
-        <Navbar />
-        <main>
+      <AmbientBackdrop />
+      <Navbar />
+      <main>
           <Hero />
           <About />
           <Services />
@@ -39,8 +35,7 @@ export default function Home() {
           <ProjectEnquiry />
           <TechMarquee />
           <Footer />
-        </main>
-      </ClickSpark>
+      </main>
     </SmoothScroll>
   )
 }
