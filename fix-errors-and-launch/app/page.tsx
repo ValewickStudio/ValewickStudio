@@ -13,7 +13,6 @@ import { LoadingIntro } from "@/components/loading-intro"
 import { ReviewCapsule } from "@/components/reviews"
 import { AmbientBackdrop } from "@/components/ambient-backdrop"
 import { ClickSpark } from "@/components/react-bits/click-spark"
-import { SiteMotionEffects } from "@/components/react-bits/site-motion-effects"
 
 export const metadata: Metadata = {
   title: "Websites, Creative & Digital Systems",
@@ -28,7 +27,6 @@ export default function Home() {
         <AmbientBackdrop />
         <LoadingIntro />
         <Navbar />
-        <SiteMotionEffects />
         <main>
           <Hero />
           <About />
