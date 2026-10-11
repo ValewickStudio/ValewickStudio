@@ -18,11 +18,31 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
-  title: "Valewick House — Digital Growth & AI Systems",
-  description: "Valewick House creates considered websites, campaign creative, and digital systems. Explore website packages or start with a $50 homepage concept.",
-  generator: "v0.app",
-  icons: { icon: "/brand/valewick-monogram.png", apple: "/brand/valewick-monogram.png" },
-  openGraph: { title: "Valewick House — Digital Growth & AI Systems", description: "Distinctive websites, creative, and AI systems for better business." },
+  metadataBase: new URL("https://www.valewickstudio.com"),
+  title: {
+    default: "Valewick House | Websites, Creative & Digital Systems",
+    template: "%s | Valewick House",
+  },
+  description: "Valewick House builds considered websites, campaign creative, and practical digital systems for ambitious businesses. Explore services, view selected work, or enquire about a project.",
+  applicationName: "Valewick House",
+  alternates: { canonical: "/" },
+  icons: {
+    icon: [{ url: "/icon-dark-32x32.png", sizes: "32x32", type: "image/png" }],
+    shortcut: "/icon-dark-32x32.png",
+    apple: "/apple-icon.png",
+  },
+  openGraph: {
+    type: "website",
+    url: "https://www.valewickstudio.com/",
+    siteName: "Valewick House",
+    title: "Valewick House | Websites, Creative & Digital Systems",
+    description: "Considered websites, campaign creative, and practical digital systems for ambitious businesses.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Valewick House | Websites, Creative & Digital Systems",
+    description: "Considered websites, campaign creative, and practical digital systems for ambitious businesses.",
+  },
 }
 
 export const viewport: Viewport = {
