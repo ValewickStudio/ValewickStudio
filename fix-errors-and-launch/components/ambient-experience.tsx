@@ -55,6 +55,7 @@ function playSoftNote(context: AudioContext, master: GainNode, frequency: number
 export function AmbientExperience() {
   const [soundOn, setSoundOn] = useState(false)
   const [soundLoading, setSoundLoading] = useState(false)
+  const [autoplayBlocked, setAutoplayBlocked] = useState(false)
   const contextRef = useRef<AudioContext | null>(null)
   const masterRef = useRef<GainNode | null>(null)
   const chordTimerRef = useRef<number | null>(null)
@@ -93,9 +94,10 @@ export function AmbientExperience() {
       master.gain.setValueAtTime(0.0001, context.currentTime)
       master.gain.exponentialRampToValueAtTime(0.12, context.currentTime + 2.4)
       master.connect(context.destination)
-      await context.resume()
       contextRef.current = context
       masterRef.current = master
+      await context.resume()
+      if (context.state !== "running") throw new Error("Audio playback requires a user gesture")
       chordIndexRef.current = 0
       melodyIndexRef.current = 0
       playSoftChord(context, master, chords[0], context.currentTime + 0.05)
@@ -115,12 +117,24 @@ export function AmbientExperience() {
         playSoftNote(activeContext, activeMaster, melody[melodyIndexRef.current], activeContext.currentTime + 0.04)
       }, 1650)
       setSoundOn(true)
+      setAutoplayBlocked(false)
     } catch {
+      const failedContext = contextRef.current
+      contextRef.current = null
+      masterRef.current = null
+      if (failedContext && failedContext.state !== "closed") void failedContext.close().catch(() => undefined)
       setSoundOn(false)
+      setAutoplayBlocked(true)
     } finally {
       setSoundLoading(false)
     }
   }, [])
+
+  // Try to begin the soundscape on page load. Browsers may block audible autoplay;
+  // when they do, the control stays available for a one-tap start.
+  useEffect(() => {
+    void startSound()
+  }, [startSound])
 
   useEffect(() => () => {
     if (chordTimerRef.current !== null) window.clearInterval(chordTimerRef.current)
@@ -142,16 +156,16 @@ export function AmbientExperience() {
         onClick={toggleSound}
         disabled={soundLoading}
         className="soundscape-control liquid-glass"
-        aria-label={soundOn ? "Pause chill background music" : "Play chill background music"}
+        aria-label={soundOn ? "Pause chill background music" : "Start chill background music"}
         aria-pressed={soundOn}
-        title={soundOn ? "Pause chill music" : "Play chill music"}
+        title={soundOn ? "Pause chill music" : autoplayBlocked ? "Tap to enable chill music" : "Start chill music"}
       >
         <span className={soundOn ? "soundscape-icon soundscape-icon-active" : "soundscape-icon"} aria-hidden="true">
-          {soundOn ? <Volume2 size={16} strokeWidth={1.6} /> : <VolumeX size={16} strokeWidth={1.6} />}
+          {soundOn ? <Volume2 size={16} strokeWidth={1.6} /> : autoplayBlocked ? <VolumeX size={16} strokeWidth={1.6} /> : <Volume2 size={16} strokeWidth={1.6} />}
         </span>
         <span className="soundscape-copy">
-          <span className="soundscape-eyebrow">{soundOn ? "NOW PLAYING" : "SOUND OFF"}</span>
-          <span className="soundscape-label">{soundLoading ? "Waking the soundscape…" : soundOn ? "Pause chill music" : "Play chill music"}</span>
+          <span className="soundscape-eyebrow">{soundOn ? "NOW PLAYING" : soundLoading ? "STARTING" : autoplayBlocked ? "TAP TO START" : "SOUND ON"}</span>
+          <span className="soundscape-label">{soundLoading ? "Waking the soundscape…" : soundOn ? "Pause chill music" : autoplayBlocked ? "Enable chill music" : "Start chill music"}</span>
         </span>
         <span className={soundOn ? "soundscape-wave soundscape-wave-on" : "soundscape-wave"} aria-hidden="true">
           <Waves size={15} strokeWidth={1.5} />
