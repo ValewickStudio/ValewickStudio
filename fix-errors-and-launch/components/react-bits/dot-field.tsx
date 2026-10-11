@@ -33,8 +33,8 @@ export const DotField = memo(function DotField({ dotRadius=1.15,dotSpacing=17,bu
       ctx.globalAlpha=1
       if(!reduce.matches&&mouse.active)raf=requestAnimationFrame(draw)
     }
-    const observer=new ResizeObserver(resize);observer.observe(canvas);canvas.addEventListener("pointermove",move);canvas.addEventListener("pointerleave",leave);resize()
-    return()=>{observer.disconnect();canvas.removeEventListener("pointermove",move);canvas.removeEventListener("pointerleave",leave);if(raf)cancelAnimationFrame(raf)}
+    const observer=new ResizeObserver(resize);observer.observe(canvas);window.addEventListener("pointermove",move,{passive:true});window.addEventListener("blur",leave);resize()
+    return()=>{observer.disconnect();window.removeEventListener("pointermove",move);window.removeEventListener("blur",leave);if(raf)cancelAnimationFrame(raf)}
   },[dotRadius,dotSpacing,bulgeStrength,cursorRadius,waveAmplitude])
   return <div className={`dot-field ${className}`} aria-hidden="true"><canvas ref={canvasRef}/><div className="dot-field__vignette"/></div>
 })
