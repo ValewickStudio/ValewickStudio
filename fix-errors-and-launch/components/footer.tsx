@@ -138,11 +138,11 @@ Facebook: https://www.facebook.com/ValewickHouse/`
             <span className="mt-2 block max-w-[16rem] leading-5">YOUR TIME ZONE · {timeZone || "DETECTING"}</span>
           </div>
           <div className="grid gap-6 font-mono text-[10px] tracking-[0.14em] text-muted-foreground sm:grid-cols-2 xl:grid-cols-3">
-            <div className="grid gap-3"><span className="text-white">CONTACT</span><button type="button" onClick={copyEmail} className="w-fit text-left transition-colors hover:text-white" aria-label="Copy email address">valewickhouse@gmail.com</button><span className="text-white/50">{copied ? "Copied to clipboard." : "Click email to copy"}</span></div>
-            <div className="grid gap-3"><span className="text-white">MESSAGE</span><span>Telegram @ValeWickHouse</span><span>WhatsApp +95 9 698077904</span><span>WeChat available</span></div>
+            <div className="grid gap-3"><span className="text-white">CONTACT</span><a href="mailto:valewickhouse@gmail.com" className="w-fit text-left underline underline-offset-4 decoration-white/20 hover:text-white">valewickhouse@gmail.com</a><a href="tel:+959698077904" className="w-fit text-left hover:text-white">+95 9 698077904</a><button type="button" onClick={copyEmail} className="w-fit text-left text-white/50 underline underline-offset-4" aria-label="Copy email address">{copied ? "Email copied." : "Copy email address"}</button></div>
+            <div className="grid gap-3"><span className="text-white">MESSAGE</span><span>Telegram @ValeWickHouse</span><a href="https://wa.me/959698077904" target="_blank" rel="noreferrer" className="hover:text-white">WhatsApp +95 9 698077904</a><span>WeChat available</span></div>
             <div className="grid gap-3"><span className="text-white">FOLLOW</span><span className="flex flex-wrap gap-x-4 gap-y-2">{socials.map((social) => <a key={social.label} href={social.href} target="_blank" rel="noreferrer" className="transition-colors hover:text-white">{social.label}</a>)}</span></div>
           </div>
-          <p className="font-mono text-[10px] tracking-[0.14em] text-muted-foreground lg:text-right">© 2026 Vale Wick<br />All rights reserved.</p>
+          <p className="font-mono text-[10px] tracking-[0.14em] text-muted-foreground lg:text-right">© {new Date().getFullYear()} Vale Wick<br />All rights reserved.</p>
         </div>
       </div>
     </footer>
