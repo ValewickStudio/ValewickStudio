@@ -76,7 +76,7 @@
 }
 
 @theme inline {
-  --font-sans: "Playfair Display", "Georgia", serif;
+  --font-sans: var(--font-space-grotesk), "Arial", sans-serif;
   --font-mono: "Geist Mono", "Geist Mono Fallback", monospace;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -587,3 +587,11 @@ main > section:not(:first-child)::before { background: rgb(221 202 160 / 16%); }
 @media (prefers-reduced-motion: reduce) {
   .ambient-orbit, .hero-stage::after { animation: none !important; }
 }
+
+/* Final no-gradient rule: use solid colors and real media for depth. */
+body, main, main > section, main > section::before, .hero-stage,
+.hero-stage::before, .hero-stage a, .glass-nav, .liquid-glass,
+.soundscape-control {
+  background-image: none !important;
+}
+.hero-stage::before { background: none !important; }
