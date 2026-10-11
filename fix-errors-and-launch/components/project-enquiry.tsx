@@ -5,6 +5,7 @@ import { ArrowUpRight } from "lucide-react"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Field, FieldGroup, FieldLabel, FieldLegend, FieldSet } from "@/components/ui/field"
 import type { EnquiryPrefill } from "@/lib/enquiry-events"
+import { BlurText } from "@/components/react-bits/blur-text"
 
 const services = ["Website", "Homepage Concept", "AI Video", "Creative", "Website Management", "Automation"]
 const websitePackages = ["Lite", "Essential", "Growth", "Complete", "Help me choose"]
@@ -110,11 +111,11 @@ export function ProjectEnquiry() {
 
   return (
     <section id="apply" className="relative isolate scroll-mt-24 overflow-hidden border-t border-white/10 px-6 py-24 md:px-12 md:py-28">
-      <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(circle_at_18%_20%,rgba(255,255,255,0.09),transparent_32%),radial-gradient(circle_at_90%_80%,rgba(151,180,255,0.08),transparent_35%)]" />
+      <div aria-hidden="true" className="pointer-events-none absolute -left-20 top-16 -z-10 size-72 rounded-full bg-white/[0.035] blur-3xl" /><div aria-hidden="true" className="pointer-events-none absolute -bottom-20 right-0 -z-10 size-80 rounded-full bg-white/[0.025] blur-3xl" />
       <div className="mx-auto grid max-w-6xl items-start gap-10 lg:grid-cols-[.8fr_1.2fr]">
         <div>
           <p className="font-mono text-xs tracking-[0.3em] text-muted-foreground">PROJECT ENQUIRY</p>
-          <h2 className="mt-4 text-4xl font-light tracking-tight md:text-5xl">Tell us about<br /><span className="italic">your next chapter.</span></h2>
+          <h2 className="mt-4 text-4xl font-light tracking-tight md:text-5xl"><BlurText text="Tell us about" delay={65} /><br /><span className="italic"><BlurText text="your next chapter." delay={80} direction="top" /></span></h2>
           <p className="mt-5 max-w-sm font-mono text-xs leading-7 text-muted-foreground">Share the idea, the challenge, or the ambition. We’ll help you find a sensible starting point.</p>
           <a href="#concept" className="mt-8 inline-flex items-center gap-2 font-mono text-[10px] tracking-[0.12em] text-muted-foreground underline decoration-white/25 underline-offset-4 transition-colors hover:text-foreground">Explore the $50 Homepage Concept <ArrowUpRight aria-hidden="true" className="size-3" /></a>
         </div>
@@ -126,7 +127,7 @@ export function ProjectEnquiry() {
             <a href="#systems" className="mt-8 inline-block font-mono text-xs">EXPLORE OUR SERVICES →</a>
           </div>
         ) : (
-          <form onSubmit={submitApplication} onInvalid={() => setAttemptedSubmit(true)} className="liquid-glass rounded-2xl border border-white/15 p-5 md:p-8" aria-busy={isSubmitting}>
+          <form onSubmit={submitApplication} onInvalid={() => setAttemptedSubmit(true)} className="liquid-glass spotlight-card glare-hover rounded-2xl border border-white/15 p-5 md:p-8" aria-busy={isSubmitting}>
             <FieldGroup className="grid gap-5">
             <div className="grid gap-5 sm:grid-cols-2">
               <EnquiryField>FULL NAME<input name="fullName" autoComplete="name" required placeholder="Your name" className={fieldClass} /></EnquiryField>
