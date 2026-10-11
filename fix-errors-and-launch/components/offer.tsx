@@ -5,7 +5,7 @@ import { motion, useReducedMotion } from "framer-motion"
 import { prefillEnquiry } from "@/lib/enquiry-events"
 import { BlurText } from "@/components/react-bits/blur-text"
 import { FoldText } from "@/components/react-bits/fold-text"
-import { DepthCarousel } from "@/components/react-bits/depth-carousel"
+import { CardSwap } from "@/components/react-bits/card-swap"
 
 const services = [
   ["01", "Websites with purpose.", "Custom websites and landing pages shaped around your brand, your audience, and the next step you want them to take."],
