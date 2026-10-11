@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
+import Image from "next/image"
 
 const navLinks = [
   { label: "Systems", href: "#systems" },
@@ -48,9 +49,13 @@ export function Navbar() {
             }}
             className="group flex items-center gap-2"
           >
-            <img
+            <Image
               src="/brand/valewick-lockup.png"
               alt="Valewick House"
+              width={240}
+              height={72}
+              priority
+              sizes="(max-width: 768px) 150px, 240px"
               className="h-9 w-auto object-contain brightness-0 invert transition-opacity duration-300 group-hover:opacity-75"
             />
           </a>
