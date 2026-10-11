@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef } from "react"
 import { motion, useReducedMotion } from "framer-motion"
+import "./fold-text.css"
 
 type FoldTextProps = {
   text: string
