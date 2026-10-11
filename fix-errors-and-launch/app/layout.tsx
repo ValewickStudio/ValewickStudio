@@ -1,6 +1,6 @@
 import type React from "react"
 import type { Metadata, Viewport } from "next"
-import { Playfair_Display, Geist_Mono } from "next/font/google"
+import { Playfair_Display, Geist_Mono, Space_Grotesk } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import { AmbientExperience } from "@/components/ambient-experience"
 import "./globals.css"
@@ -9,6 +9,8 @@ const playfair = Playfair_Display({
   subsets: ["latin"],
   variable: "--font-playfair",
 })
+
+const spaceGrotesk = Space_Grotesk({ subsets: ["latin"], variable: "--font-space-grotesk" })
 
 const geistMono = Geist_Mono({
   subsets: ["latin"],
@@ -33,7 +35,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`${playfair.variable} ${geistMono.variable}`}>
+    <html lang="en" className={`${playfair.variable} ${geistMono.variable} ${spaceGrotesk.variable}`}>
       <body className="font-sans antialiased overflow-x-hidden">
         <div className="noise-overlay" />
         {children}
