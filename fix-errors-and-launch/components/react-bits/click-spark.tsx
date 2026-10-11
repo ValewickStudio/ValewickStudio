@@ -1,9 +1,9 @@
 "use client"
 
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, type ReactNode } from "react"
 
 type ClickSparkProps = {
-  children: React.ReactNode
+  children: ReactNode
   sparkColor?: string
   sparkSize?: number
   sparkRadius?: number
