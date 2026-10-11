@@ -1,6 +1,7 @@
 "use client"
 
 import { motion, useReducedMotion } from "framer-motion"
+import { CircularText } from "@/components/react-bits/circular-text"
 
 const statements = [
   ["Presence", "A website that feels unmistakably yours."],
@@ -27,9 +28,9 @@ export function About() {
             </motion.div>
           ))}
         </div>
-        <div className="mt-10 flex flex-col gap-4 rounded-2xl border border-white/10 bg-white/[0.025] p-5 sm:flex-row sm:items-center sm:justify-between md:p-7">
+        <div className="mt-10 flex flex-col gap-6 rounded-2xl border border-white/10 bg-white/[0.025] p-5 sm:flex-row sm:items-center sm:justify-between md:p-7">
           <div><p className="font-mono text-[10px] tracking-[0.16em] text-muted-foreground">A FIRST STEP · $50 USD</p><p className="mt-2 text-xl font-light">Explore a homepage direction before a full website commitment.</p></div>
-          <a href="#concept" className="inline-flex min-h-11 shrink-0 items-center gap-2 rounded-full border border-white/25 px-5 py-3 font-mono text-[10px] tracking-[0.12em] transition-colors hover:bg-white hover:text-black">VIEW THE CONCEPT <span aria-hidden="true">→</span></a>
+          <div className="flex items-center gap-5"><CircularText text="VALEWICK HOUSE • DIGITAL STUDIO • " spinDuration={30} onHover="speedUp" /><a href="#concept" className="inline-flex min-h-11 shrink-0 items-center gap-2 rounded-full border border-white/25 px-5 py-3 font-mono text-[10px] tracking-[0.12em] transition-colors hover:bg-white hover:text-black">VIEW THE CONCEPT <span aria-hidden="true">→</span></a></div>
         </div>
         {/* Decorative Line */}
         <motion.a href="#systems" whileHover={reduceMotion ? undefined : { x: 8 }} className="group mt-8 inline-flex items-center gap-3 font-mono text-xs tracking-widest text-muted-foreground transition-colors hover:text-foreground">EXPLORE WHAT WE BUILD <span aria-hidden="true" className="transition-transform group-hover:translate-x-1">→</span></motion.a>
