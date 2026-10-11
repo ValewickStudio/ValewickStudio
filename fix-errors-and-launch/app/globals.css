@@ -1129,3 +1129,40 @@ body, html { background: #080909; }
   background-image: none !important;
 }
 .review-ticker-mask { mask-image: none; }
+
+
+/* Hover contrast safeguard — card text must never darken into the surface. */
+.package-card:hover :is(p, li) {
+  color: inherit !important;
+}
+.package-card:hover :is(h3, h4) {
+  color: var(--foreground) !important;
+}
+.package-card:hover .text-muted-foreground {
+  color: #c4c0b7 !important;
+}
+/* Keep glare and spotlight effects strictly behind content. */
+.glare-hover::after,
+.spotlight-card::before {
+  z-index: 0;
+  pointer-events: none;
+}
+.glare-hover > *,
+.spotlight-card > * {
+  position: relative;
+  z-index: 1;
+}
+.soundscape-control,
+.soundscape-control:hover,
+.soundscape-control:focus-visible {
+  color: #f7f1e5;
+}
+.soundscape-control :is(.soundscape-eyebrow, .soundscape-label, .soundscape-icon, .soundscape-wave) {
+  opacity: 1;
+  visibility: visible;
+}
+@media (hover: hover) {
+  .package-card:hover {
+    color: var(--foreground);
+  }
+}
