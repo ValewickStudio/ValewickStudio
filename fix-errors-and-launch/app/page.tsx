@@ -1,3 +1,4 @@
+import type { Metadata } from "next"
 import { Navbar } from "@/components/navbar"
 import { Hero } from "@/components/hero"
 import { About } from "@/components/about"
@@ -11,6 +12,12 @@ import { WebsitePackages } from "@/components/website-packages"
 import { ProjectEnquiry } from "@/components/project-enquiry"
 import { LoadingIntro } from "@/components/loading-intro"
 import { ReviewCapsule } from "@/components/reviews"
+
+export const metadata: Metadata = {
+  title: "Websites, Creative & Digital Systems",
+  description: "Explore Valewick House services, selected work, website packages, and the $50 homepage concept. Tell us about your next project.",
+  alternates: { canonical: "/" },
+}
 
 export default function Home() {
   return (
