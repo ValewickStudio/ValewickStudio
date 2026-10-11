@@ -619,3 +619,7 @@ img, video, canvas, iframe, svg { max-width: 100%; }
 .hero-stage::before, .hero-stage::after { background: none !important; }
 .ambient-orbit { background: #161614 !important; opacity: .22; filter: none !important; }
 .motion-reveal, .motion-reveal.is-in-view, .scroll-reveal, [data-reveal] { opacity: 1 !important; transform: none !important; filter: none !important; animation: none !important; }
+
+/* Preserve hero choreography, but never fade whole content sections on scroll. */
+main > section:not(.hero-stage) [style*="opacity"], main > section:not(.hero-stage) [style*="transform"] { opacity: 1 !important; transform: none !important; }
+main .italic, main em { font-style: normal !important; }
