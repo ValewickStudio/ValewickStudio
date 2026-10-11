@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react"
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion"
 import { ArrowLeft, ArrowRight, ArrowUpRight, Globe2 } from "lucide-react"
+import "./depth-carousel.css"
 
 export type DepthCarouselItem = {
   label: string
@@ -58,7 +59,7 @@ export function DepthCarousel({ items, activeIndex, onChange, className = "" }: 
               onClick={() => isActive ? item.onOpen?.() : go(index)}
               initial={false}
               animate={{
-                x: distance * (typeof window !== "undefined" && window.innerWidth < 640 ? 94 : 154),
+                x: distance * 154,
                 z: -Math.abs(distance) * 135,
                 rotateY: distance * -18,
                 rotateZ: distance * -2,
