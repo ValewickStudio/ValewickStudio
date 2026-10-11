@@ -623,3 +623,44 @@ img, video, canvas, iframe, svg { max-width: 100%; }
 /* Preserve hero choreography, but never fade whole content sections on scroll. */
 main > section:not(.hero-stage) [style*="opacity"], main > section:not(.hero-stage) [style*="transform"] { opacity: 1 !important; transform: none !important; }
 main .italic, main em { font-style: normal !important; }
+
+
+/* Premium liquid-glass motion pass: monochrome surfaces, no gradients. */
+:root { --glass-fill: rgba(25,25,23,.68); --glass-fill-strong: rgba(31,31,29,.9); --glass-edge: rgba(245,242,232,.2); }
+.glass-nav, .liquid-glass, .soundscape-control, .package-card, .countdown-cell, [class*="glass-panel"], [class*="glass-card"] {
+ position:relative; isolation:isolate; overflow:hidden; background:var(--glass-fill)!important; background-image:none!important;
+ border:1px solid var(--glass-edge)!important; -webkit-backdrop-filter:blur(28px) saturate(115%); backdrop-filter:blur(28px) saturate(115%);
+ box-shadow:inset 0 1px 0 rgba(255,255,255,.12),inset 0 -1px 0 rgba(0,0,0,.2),0 12px 32px rgba(0,0,0,.22);
+ transition:transform 520ms cubic-bezier(.2,.75,.25,1),background-color 520ms ease,border-color 520ms ease,box-shadow 520ms ease;
+}
+.glass-nav { background:rgba(20,20,18,.8)!important; animation:glass-nav-arrive 900ms cubic-bezier(.2,.8,.2,1) both; }
+.liquid-glass::before,.package-card::before,.countdown-cell::before,[class*="glass-panel"]::before,[class*="glass-card"]::before {
+ content:"";position:absolute;z-index:-1;inset:0;pointer-events:none;border-radius:inherit;background:rgba(255,255,255,.04);box-shadow:inset 0 1px 0 rgba(255,255,255,.1);opacity:.8;transition:opacity 450ms ease;
+}
+.liquid-glass::after,.package-card::after,.countdown-cell::after,[class*="glass-panel"]::after,[class*="glass-card"]::after {
+ content:"";position:absolute;z-index:-1;top:0;left:12%;width:76%;height:1px;pointer-events:none;background:rgba(255,255,255,.24);opacity:.35;transform:scaleX(.4);transform-origin:center;transition:transform 650ms cubic-bezier(.2,.8,.2,1),opacity 450ms ease;
+}
+@media (hover:hover) and (prefers-reduced-motion:no-preference) {
+ .liquid-glass:hover,.package-card:hover,.countdown-cell:hover,[class*="glass-panel"]:hover,[class*="glass-card"]:hover { transform:translateY(-5px) scale(1.008);background:var(--glass-fill-strong)!important;border-color:rgba(245,242,232,.3)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.17),0 22px 50px rgba(0,0,0,.32); }
+ .liquid-glass:hover::before,.package-card:hover::before,.countdown-cell:hover::before,[class*="glass-panel"]:hover::before,[class*="glass-card"]:hover::before { opacity:1; }
+ .liquid-glass:hover::after,.package-card:hover::after,.countdown-cell:hover::after,[class*="glass-panel"]:hover::after,[class*="glass-card"]:hover::after { transform:scaleX(1);opacity:.8; }
+ button:not(.package-card) { transition:transform 260ms cubic-bezier(.2,.8,.2,1),background-color 260ms ease,border-color 260ms ease,box-shadow 260ms ease; }
+ button:not(.package-card):active { transform:scale(.975); }
+ .glass-nav a,.glass-nav button { transition:color 280ms ease,transform 280ms cubic-bezier(.2,.8,.2,1),background-color 280ms ease; }
+ .glass-nav a:hover,.glass-nav button:hover { transform:translateY(-1px); }
+}
+.ambient-orbit { opacity:.18!important;filter:blur(68px)!important;background:#77736b!important;animation:ambient-drift-a 22s ease-in-out infinite alternate!important;will-change:transform; }
+.ambient-orbit-two { background:#4d4b46!important;animation:ambient-drift-b 28s ease-in-out infinite alternate-reverse!important; }
+.soundscape-control { animation:sound-control-arrive 850ms cubic-bezier(.2,.8,.2,1) 900ms both; }
+.soundscape-icon-active { animation:sound-icon-pulse 2.8s ease-in-out infinite; }
+.soundscape-wave-on { animation:sound-wave-breathe 1.6s ease-in-out infinite; }
+.hero-stage .liquid-glass { animation:hero-control-float 7s ease-in-out infinite; }
+@keyframes ambient-drift-a { 0%{transform:translate3d(-5vw,-2vh,0) scale(.95)} 50%{transform:translate3d(7vw,5vh,0) scale(1.08)} 100%{transform:translate3d(2vw,-6vh,0) scale(1)} }
+@keyframes ambient-drift-b { 0%{transform:translate3d(5vw,4vh,0) scale(1.02)} 50%{transform:translate3d(-8vw,-4vh,0) scale(.92)} 100%{transform:translate3d(-2vw,7vh,0) scale(1.07)} }
+@keyframes glass-nav-arrive { from{opacity:.7;transform:translateY(-12px) scale(.99)} to{opacity:1;transform:translateY(0) scale(1)} }
+@keyframes sound-control-arrive { from{opacity:0;transform:translateY(14px) scale(.96)} to{opacity:1;transform:translateY(0) scale(1)} }
+@keyframes sound-icon-pulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.12)} }
+@keyframes sound-wave-breathe { 0%,100%{opacity:.55;transform:scale(.94)} 50%{opacity:1;transform:scale(1.06)} }
+@keyframes hero-control-float { 0%,100%{box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 12px 32px rgba(0,0,0,.22)} 50%{box-shadow:inset 0 1px 0 rgba(255,255,255,.19),0 18px 42px rgba(0,0,0,.28)} }
+@media(max-width:767px) { .glass-nav,.liquid-glass,.soundscape-control,.package-card,.countdown-cell,[class*="glass-panel"],[class*="glass-card"]{-webkit-backdrop-filter:blur(18px) saturate(110%);backdrop-filter:blur(18px) saturate(110%)} }
+@media(prefers-reduced-motion:reduce) { .ambient-orbit,.soundscape-control,.soundscape-icon-active,.soundscape-wave-on,.glass-nav,.hero-stage .liquid-glass{animation:none!important}.glass-nav,.liquid-glass,.package-card,.countdown-cell,button,a{transition-duration:.01ms!important} }
