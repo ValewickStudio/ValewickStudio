@@ -38,7 +38,7 @@ export function Navbar() {
         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         className="fixed inset-x-0 top-0 z-50 px-3 pt-3 transition-all duration-500 md:px-8 md:pt-5"
       >
-        <nav className={`glass-nav mx-auto flex max-w-[1440px] items-center justify-between rounded-full px-5 py-3 transition-all duration-500 md:px-8 md:py-3.5 ${isScrolled ? "shadow-[0_18px_60px_rgba(0,0,0,0.36)]" : "bg-black/10"}`}>
+        <nav className={`glass-nav mx-auto flex max-w-[1440px] items-center justify-between rounded-full px-5 py-3 transition-all duration-500 md:px-8 md:py-3.5 ${isScrolled ? "shadow-[0_22px_75px_rgba(0,0,0,0.48)]" : ""}`}>
           {/* Logo */}
           <a
             href="#"
