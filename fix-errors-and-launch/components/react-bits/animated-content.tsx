@@ -22,7 +22,7 @@ export function AnimatedContent({ children, distance = 34, direction = "vertical
     const el = ref.current
     if (!el) return
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches
-    if (reduce) { el.dataset.animated = "true"; return }
+    if (reduce || typeof IntersectionObserver === "undefined") { el.dataset.animated = "true"; return }
     el.style.setProperty("--animated-distance", `${reverse ? -distance : distance}px`)
     el.style.setProperty("--animated-duration", `${duration}s`)
     el.style.setProperty("--animated-delay", `${delay}s`)
