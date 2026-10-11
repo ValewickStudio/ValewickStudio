@@ -6,6 +6,7 @@ import { SentientSphere } from "./sentient-sphere"
 import { prefillEnquiry } from "@/lib/enquiry-events"
 import { TrustpilotNote } from "@/components/reviews"
 import { TextType } from "@/components/react-bits/text-type"
+import { FoldText } from "@/components/react-bits/fold-text"
 
 
 export function Hero() {
@@ -34,9 +35,9 @@ export function Hero() {
           transition={{ duration: 1, delay: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
         >
           <h2 className="font-sans text-5xl font-light leading-[0.98] tracking-[-0.045em] text-balance md:text-7xl lg:text-[6.5rem]">
-            <motion.span className="inline-block" initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.3 }}>Digital presence.</motion.span>
+            <FoldText text="Digital presence." splitBy="word" stagger={0.045} fontSize="inherit" fontWeight={300} className="font-sans" />
             <br />
-            <motion.span className="inline-block" initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.46 }}>Real ambition.</motion.span>
+            <FoldText text="Real ambition." splitBy="word" stagger={0.065} fontSize="inherit" fontWeight={300} className="font-sans" />
           </h2>
           <p className="mt-5 min-h-12 max-w-sm font-mono text-xs leading-6 text-muted-foreground"><TextType text={["Websites with purpose.", "Creative that connects.", "Systems that work smarter."]} typingSpeed={48} deletingSpeed={24} pauseDuration={1500} initialDelay={650} /></p><p className="mt-4 max-w-sm font-mono text-[10px] leading-5 tracking-[0.12em] text-white/55">CLEAR SCOPE · RESPONSIVE BUILD · HUMAN SUPPORT</p>
           <a href="#concept" className="liquid-glass mt-6 inline-flex min-h-11 items-center rounded-full border border-white/20 px-5 py-3 font-mono text-[10px] tracking-[0.12em] text-white/85 transition-colors hover:border-white hover:bg-white hover:text-black">EXPLORE THE $50 HOMEPAGE CONCEPT →</a>
@@ -70,9 +71,9 @@ export function Hero() {
         >
           <p className="mb-2 font-mono text-xs tracking-[0.3em] text-muted-foreground">YOUR NEXT CHAPTER<span aria-hidden="true" className="chapter-ellipsis" /></p>
           <h2 className="font-sans text-3xl font-light tracking-tight text-balance md:text-5xl lg:text-6xl">
-            <motion.span className="inline-block" initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.52 }}>Made to stand out.</motion.span>
+            <FoldText text="Made to stand out." splitBy="word" stagger={0.045} fontSize="inherit" fontWeight={300} className="font-sans" />
             <br />
-            <motion.span className="inline-block" initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.68 }}>Built to grow.</motion.span>
+            <FoldText text="Built to grow." splitBy="word" stagger={0.065} fontSize="inherit" fontWeight={300} className="font-sans" />
           </h2>
           <div className="mt-6 flex justify-end"><TrustpilotNote /></div>
         </motion.div>
