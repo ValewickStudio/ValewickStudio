@@ -1,0 +1,19 @@
+.text-type {
+  display: inline;
+  white-space: normal;
+}
+
+.text-type__cursor {
+  display: inline-block;
+  margin-left: 0.18em;
+  color: currentColor;
+  animation: text-type-blink 0.85s steps(2, start) infinite;
+}
+
+@keyframes text-type-blink {
+  to { visibility: hidden; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .text-type__cursor { animation: none; }
+}
