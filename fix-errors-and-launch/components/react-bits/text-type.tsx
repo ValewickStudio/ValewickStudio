@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
+import "./text-type.css"
 
 type TextTypeProps = {
   text: string | string[]
