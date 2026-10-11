@@ -2,6 +2,7 @@
 
 import { motion, useReducedMotion } from "framer-motion"
 import { ArrowUpRight, BadgeCheck, Quote } from "lucide-react"
+import { BlurText } from "@/components/react-bits/blur-text"
 
 const commitments = [
   { number: "01", title: "A considered first conversation.", copy: "We start by understanding the business, the audience, and what a useful next step looks like." },
