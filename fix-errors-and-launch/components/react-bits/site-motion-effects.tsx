@@ -6,11 +6,11 @@ export function SiteMotionEffects() {
   useEffect(() => {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches
     const apply = (root: ParentNode) => {
-      root.querySelectorAll<HTMLElement>("main section, main section article, main section h2, main section h3, main section h4, main section p, main section li, main section blockquote").forEach((el) => {
+      root.querySelectorAll<HTMLElement>("main section, main section article, main section h2, main section h3, main section h4, main section p, main section li, main section blockquote, main section a, main section button, main section label, main section .liquid-glass, main section .package-card, main section .spotlight-card, main section [class*="rounded-2xl"], main section [class*="rounded-3xl"]").forEach((el) => {
         if (el.closest(".hero-stage") || el.dataset.motionReady === "true") return
         el.dataset.motionReady = "true"
-        if (el.matches("article, blockquote")) el.classList.add("site-glare-target")
-        if (el.matches("h2,h3,h4")) el.classList.add("site-shine-target")
+        if (el.matches("article, blockquote, a, button, label, .liquid-glass, .package-card, .spotlight-card, [class*=\"rounded-2xl\"], [class*=\"rounded-3xl\"], h2, h3, h4, p, li")) el.classList.add("site-glare-target")
+        if (el.matches("h2,h3,h4,p")) el.classList.add("site-shine-target")
         if (!reduce) {
           el.classList.add("site-scroll-target")
           observer.observe(el)
