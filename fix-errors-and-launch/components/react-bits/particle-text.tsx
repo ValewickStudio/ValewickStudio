@@ -76,7 +76,7 @@ export function ParticleText({
       const targets:{x:number;y:number;alpha:number}[]=[]
       for(let y=0;y<off.height;y+=Math.max(2,density)) for(let x=0;x<off.width;x+=Math.max(2,density)) {
         const alpha=pixels[(y*off.width+x)*4+3]
-        if(alpha>45) targets.push({x:width/2-off.width/2+x,y:height/2-off.height/2+y,alpha:alpha/255})
+        if(alpha>45) targets.push({x:(align === "left" ? 0 : width/2-off.width/2)+x,y:height/2-off.height/2+y,alpha:alpha/255})
       }
       const max=2600, stride=Math.max(1,Math.ceil(targets.length/max))
       particles=targets.filter((_,i)=>i%stride===0).map((p,i)=>{
@@ -121,7 +121,7 @@ export function ParticleText({
     observer.observe(root);canvas.addEventListener("pointermove",onMove);canvas.addEventListener("pointerleave",onLeave);canvas.addEventListener("pointerenter",onEnter);canvas.addEventListener("click",onClick)
     sample()
     return ()=>{build++;observer.disconnect();canvas.removeEventListener("pointermove",onMove);canvas.removeEventListener("pointerleave",onLeave);canvas.removeEventListener("pointerenter",onEnter);canvas.removeEventListener("click",onClick);if(raf)cancelAnimationFrame(raf)}
-  },[text,fontSize,fontWeight,particleSize,density,color,scatter,gatherDuration,trigger])
+  },[text,fontSize,fontWeight,particleSize,density,color,scatter,gatherDuration,trigger,align])
 
   return <div ref={rootRef} className={`particle-text ${className}`} aria-label={text}><canvas ref={canvasRef} aria-hidden="true"/><span className="particle-text__sr">{text}</span></div>
 }
