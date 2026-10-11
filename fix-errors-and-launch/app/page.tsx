@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import type { ReactNode } from "react"
 import { Navbar } from "@/components/navbar"
 import { Hero } from "@/components/hero"
 import { About } from "@/components/about"
@@ -23,7 +24,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/" },
 }
 
-const reveal = (content: React.ReactNode, delay = 0) => (
+const reveal = (content: ReactNode, delay = 0) => (
   <AnimatedContent distance={30} duration={0.9} threshold={0.08} delay={delay}>
     <ScrollReveal baseOpacity={0.12} baseRotation={0.8} blurStrength={2}>
       {content}
