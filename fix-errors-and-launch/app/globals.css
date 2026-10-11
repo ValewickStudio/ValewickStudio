@@ -595,3 +595,20 @@ body, main, main > section, main > section::before, .hero-stage,
   background-image: none !important;
 }
 .hero-stage::before { background: none !important; }
+
+
+/* Valewick design guardrails: solid surfaces, calm motion, and mobile-safe layout. */
+html, body { max-width: 100%; overflow-x: clip; }
+body { min-width: 320px; }
+main, header, footer, section, nav, form, article { min-width: 0; }
+img, video, canvas, iframe, svg { max-width: 100%; }
+.noise-overlay { display: none !important; }
+/* No gradients, grain overlays, gradient text, or glassmorphism surfaces. */
+* { background-image: none !important; }
+[class*="bg-clip-text"], [style*="background-clip: text"] { color: inherit !important; -webkit-text-fill-color: currentColor !important; background-clip: border-box !important; }
+.liquid-glass, .glass-nav, .soundscape-control { background: #171717 !important; background-image: none !important; -webkit-backdrop-filter: none !important; backdrop-filter: none !important; border-color: rgba(255,255,255,.14) !important; box-shadow: 0 12px 36px rgba(0,0,0,.18) !important; }
+.liquid-glass::before, .liquid-glass::after { content: none !important; display: none !important; }
+.package-card, .countdown-cell, [class*="card"] { border-color: rgba(255,255,255,.14); }
+@media (hover: hover) { button, a { transition-property: color, background-color, border-color, translate, transform; } main button:hover, main a:hover { filter: none !important; box-shadow: none; } }
+@media (max-width: 767px) { section { scroll-margin-top: 5.5rem; } main > section, footer > * { max-width: 100%; } main section { padding-left: clamp(1rem, 5vw, 1.5rem); padding-right: clamp(1rem, 5vw, 1.5rem); } h1, h2, h3, p, a, button, li { overflow-wrap: anywhere; } .soundscape-control { right: 12px !important; bottom: 12px !important; max-width: calc(100vw - 24px); } .glass-nav { border-radius: 1rem !important; } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .01ms !important; } }
