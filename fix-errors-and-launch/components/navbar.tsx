@@ -84,7 +84,9 @@ export function Navbar() {
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className="md:hidden relative w-8 h-8 flex flex-col items-center justify-center gap-1.5"
-            aria-label="Toggle menu"
+            aria-label={isMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+            aria-expanded={isMenuOpen}
+            aria-controls="mobile-navigation"
           >
             <motion.span
               animate={isMenuOpen ? { rotate: 45, y: 5 } : { rotate: 0, y: 0 }}
@@ -112,7 +114,7 @@ export function Navbar() {
             transition={{ duration: 0.3 }}
             className="fixed inset-0 z-40 bg-background/95 backdrop-blur-lg md:hidden"
           >
-            <nav className="flex flex-col items-center justify-center h-full gap-8">
+            <nav id="mobile-navigation" aria-label="Mobile navigation" className="flex flex-col items-center justify-center h-full gap-8">
               {navLinks.map((link, index) => (
                 <motion.button
                   key={link.label}
