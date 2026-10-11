@@ -10,21 +10,46 @@ const chords = [
   [196, 246.94, 293.66, 349.23],
 ]
 
+// A slow, warm melody over the repeating four-chord progression.
+const melody = [659.25, 587.33, 523.25, 587.33, 392, 440, 523.25, 440, 493.88, 440, 392, 329.63]
+
 function playSoftChord(context: AudioContext, master: GainNode, notes: number[], startAt: number) {
   notes.forEach((frequency, index) => {
     const oscillator = context.createOscillator()
     const voice = context.createGain()
+    const filter = context.createBiquadFilter()
     oscillator.type = index === 0 ? "sine" : "triangle"
     oscillator.frequency.setValueAtTime(frequency, startAt)
+    filter.type = "lowpass"
+    filter.frequency.setValueAtTime(index === 0 ? 520 : 1250, startAt)
     voice.gain.setValueAtTime(0.0001, startAt)
-    voice.gain.exponentialRampToValueAtTime(index === 0 ? 0.12 : 0.055, startAt + 2.4)
-    voice.gain.setValueAtTime(index === 0 ? 0.12 : 0.055, startAt + 5.8)
+    voice.gain.exponentialRampToValueAtTime(index === 0 ? 0.11 : 0.042, startAt + 2.6)
+    voice.gain.setValueAtTime(index === 0 ? 0.11 : 0.042, startAt + 5.6)
     voice.gain.exponentialRampToValueAtTime(0.0001, startAt + 8)
-    oscillator.connect(voice)
+    oscillator.connect(filter)
+    filter.connect(voice)
     voice.connect(master)
     oscillator.start(startAt)
     oscillator.stop(startAt + 8.1)
   })
+}
+
+function playSoftNote(context: AudioContext, master: GainNode, frequency: number, startAt: number) {
+  const oscillator = context.createOscillator()
+  const voice = context.createGain()
+  const filter = context.createBiquadFilter()
+  oscillator.type = "sine"
+  oscillator.frequency.setValueAtTime(frequency, startAt)
+  filter.type = "lowpass"
+  filter.frequency.setValueAtTime(1800, startAt)
+  voice.gain.setValueAtTime(0.0001, startAt)
+  voice.gain.exponentialRampToValueAtTime(0.022, startAt + 0.16)
+  voice.gain.exponentialRampToValueAtTime(0.0001, startAt + 2.2)
+  oscillator.connect(filter)
+  filter.connect(voice)
+  voice.connect(master)
+  oscillator.start(startAt)
+  oscillator.stop(startAt + 2.25)
 }
 
 export function AmbientExperience() {
@@ -33,20 +58,26 @@ export function AmbientExperience() {
   const contextRef = useRef<AudioContext | null>(null)
   const masterRef = useRef<GainNode | null>(null)
   const chordTimerRef = useRef<number | null>(null)
+  const melodyTimerRef = useRef<number | null>(null)
   const chordIndexRef = useRef(0)
+  const melodyIndexRef = useRef(0)
 
   const stopSound = useCallback(async () => {
-    if (chordTimerRef.current) {
-      clearInterval(chordTimerRef.current)
+    if (chordTimerRef.current !== null) {
+      window.clearInterval(chordTimerRef.current)
       chordTimerRef.current = null
+    }
+    if (melodyTimerRef.current !== null) {
+      window.clearInterval(melodyTimerRef.current)
+      melodyTimerRef.current = null
     }
     const context = contextRef.current
     const master = masterRef.current
     if (context && master && context.state !== "closed") {
       const now = context.currentTime
       master.gain.cancelScheduledValues(now)
-      master.gain.setTargetAtTime(0.0001, now, 0.18)
-      window.setTimeout(() => { void context.close().catch(() => undefined) }, 750)
+      master.gain.setTargetAtTime(0.0001, now, 0.2)
+      window.setTimeout(() => { void context.close().catch(() => undefined) }, 850)
     }
     contextRef.current = null
     masterRef.current = null
@@ -60,13 +91,15 @@ export function AmbientExperience() {
       const context = new AudioContextConstructor()
       const master = context.createGain()
       master.gain.setValueAtTime(0.0001, context.currentTime)
-      master.gain.exponentialRampToValueAtTime(0.16, context.currentTime + 2)
+      master.gain.exponentialRampToValueAtTime(0.12, context.currentTime + 2.4)
       master.connect(context.destination)
       await context.resume()
       contextRef.current = context
       masterRef.current = master
       chordIndexRef.current = 0
+      melodyIndexRef.current = 0
       playSoftChord(context, master, chords[0], context.currentTime + 0.05)
+      playSoftNote(context, master, melody[0], context.currentTime + 0.65)
       chordTimerRef.current = window.setInterval(() => {
         const activeContext = contextRef.current
         const activeMaster = masterRef.current
@@ -74,6 +107,13 @@ export function AmbientExperience() {
         chordIndexRef.current = (chordIndexRef.current + 1) % chords.length
         playSoftChord(activeContext, activeMaster, chords[chordIndexRef.current], activeContext.currentTime + 0.05)
       }, 7800)
+      melodyTimerRef.current = window.setInterval(() => {
+        const activeContext = contextRef.current
+        const activeMaster = masterRef.current
+        if (!activeContext || !activeMaster || activeContext.state !== "running") return
+        melodyIndexRef.current = (melodyIndexRef.current + 1) % melody.length
+        playSoftNote(activeContext, activeMaster, melody[melodyIndexRef.current], activeContext.currentTime + 0.04)
+      }, 1650)
       setSoundOn(true)
     } catch {
       setSoundOn(false)
@@ -83,7 +123,8 @@ export function AmbientExperience() {
   }, [])
 
   useEffect(() => () => {
-    if (chordTimerRef.current) clearInterval(chordTimerRef.current)
+    if (chordTimerRef.current !== null) window.clearInterval(chordTimerRef.current)
+    if (melodyTimerRef.current !== null) window.clearInterval(melodyTimerRef.current)
     if (contextRef.current && contextRef.current.state !== "closed") void contextRef.current.close()
   }, [])
 
@@ -101,16 +142,16 @@ export function AmbientExperience() {
         onClick={toggleSound}
         disabled={soundLoading}
         className="soundscape-control liquid-glass"
-        aria-label={soundOn ? "Mute calm background music" : "Play calm background music"}
+        aria-label={soundOn ? "Pause chill background music" : "Play chill background music"}
         aria-pressed={soundOn}
-        title={soundOn ? "Mute ambient music" : "Play ambient music"}
+        title={soundOn ? "Pause chill music" : "Play chill music"}
       >
         <span className={soundOn ? "soundscape-icon soundscape-icon-active" : "soundscape-icon"} aria-hidden="true">
           {soundOn ? <Volume2 size={16} strokeWidth={1.6} /> : <VolumeX size={16} strokeWidth={1.6} />}
         </span>
         <span className="soundscape-copy">
-          <span className="soundscape-eyebrow">{soundOn ? "SOUND ON" : "SOUND OFF"}</span>
-          <span className="soundscape-label">{soundLoading ? "Waking the soundscape…" : soundOn ? "Mute ambience" : "Play calm ambience"}</span>
+          <span className="soundscape-eyebrow">{soundOn ? "NOW PLAYING" : "SOUND OFF"}</span>
+          <span className="soundscape-label">{soundLoading ? "Waking the soundscape…" : soundOn ? "Pause chill music" : "Play chill music"}</span>
         </span>
         <span className={soundOn ? "soundscape-wave soundscape-wave-on" : "soundscape-wave"} aria-hidden="true">
           <Waves size={15} strokeWidth={1.5} />
