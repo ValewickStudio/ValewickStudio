@@ -6,7 +6,6 @@ import { Works } from "@/components/works"
 import { TechMarquee } from "@/components/tech-marquee"
 import { Footer } from "@/components/footer"
 import { SmoothScroll } from "@/components/smooth-scroll"
-import { SectionBlend } from "@/components/section-blend"
 import { Services, Demo, VideoAndCareServices } from "@/components/offer"
 import { WebsitePackages } from "@/components/website-packages"
 import { ProjectEnquiry } from "@/components/project-enquiry"
@@ -28,7 +27,6 @@ export default function Home() {
       <Navbar />
       <main>
         <Hero />
-        <SectionBlend />
         <About />
         <Services />
         <VideoAndCareServices />
