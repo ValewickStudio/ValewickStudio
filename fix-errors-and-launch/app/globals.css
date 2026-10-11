@@ -612,3 +612,10 @@ img, video, canvas, iframe, svg { max-width: 100%; }
 @media (hover: hover) { button, a { transition-property: color, background-color, border-color, translate, transform; } main button:hover, main a:hover { filter: none !important; box-shadow: none; } }
 @media (max-width: 767px) { section { scroll-margin-top: 5.5rem; } main > section, footer > * { max-width: 100%; } main section { padding-left: clamp(1rem, 5vw, 1.5rem); padding-right: clamp(1rem, 5vw, 1.5rem); } h1, h2, h3, p, a, button, li { overflow-wrap: anywhere; } .soundscape-control { right: 12px !important; bottom: 12px !important; max-width: calc(100vw - 24px); } .glass-nav { border-radius: 1rem !important; } }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .01ms !important; } }
+
+
+/* Final strict overrides: no gradient paint or scroll-triggered section fades. */
+.hero-stage::before, .hero-stage::after, .ambient-orbit, [class*="gradient"] { background-image: none !important; }
+.hero-stage::before, .hero-stage::after { background: none !important; }
+.ambient-orbit { background: #161614 !important; opacity: .22; filter: none !important; }
+.motion-reveal, .motion-reveal.is-in-view, .scroll-reveal, [data-reveal] { opacity: 1 !important; transform: none !important; filter: none !important; animation: none !important; }
