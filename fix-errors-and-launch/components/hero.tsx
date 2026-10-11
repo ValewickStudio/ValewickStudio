@@ -6,7 +6,8 @@ import { SentientSphere } from "./sentient-sphere"
 import { prefillEnquiry } from "@/lib/enquiry-events"
 import { TrustpilotNote } from "@/components/reviews"
 import { TextType } from "@/components/react-bits/text-type"
-import { FoldText } from "@/components/react-bits/fold-text"\nimport { ParticleText } from "@/components/react-bits/particle-text"
+import { FoldText } from "@/components/react-bits/fold-text"
+import { ParticleText } from "@/components/react-bits/particle-text"
 
 
 export function Hero() {
