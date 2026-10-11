@@ -1,6 +1,7 @@
 "use client"
 
 import { motion, useReducedMotion } from "framer-motion"
+import { BlurText } from "@/components/react-bits/blur-text"
 
 const capabilities = ["Distinctive websites", "Campaign creative", "Brand presence", "Business automation"]
 
@@ -11,7 +12,7 @@ export function TechMarquee() {
       {/* Section Header */}
       <motion.div initial={{ opacity: 0, y: reduceMotion ? 0 : 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }} className="mx-auto mb-10 max-w-6xl px-6 md:px-12">
         <p className="mb-4 font-mono text-xs tracking-[0.3em] text-muted-foreground">09 — ONE CONNECTED DIRECTION</p>
-        <h2 className="text-3xl font-light md:text-5xl">Your brand. <span className="italic">Working together.</span></h2>
+        <h2 className="text-3xl font-light md:text-5xl"><BlurText text="Your brand." delay={60} /> <span className="italic"><BlurText text="Working together." delay={75} direction="top" /></span></h2>
       </motion.div>
       {/* Marquee Rows */}
       <div className="brand-marquee overflow-hidden py-6" aria-label={capabilities.join(", ")}>
