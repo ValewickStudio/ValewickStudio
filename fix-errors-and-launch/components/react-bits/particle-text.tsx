@@ -14,12 +14,13 @@ type ParticleTextProps = {
   scatter?: number
   gatherDuration?: number
   trigger?: "mount" | "hover" | "click"
+  align?: "left" | "center"
 }
 
 export function ParticleText({
   text, className = "", fontSize = "clamp(2.7rem, 7vw, 6.5rem)", fontWeight = 300,
   particleSize = 1.65, density = 5, color = "#f4f0e8", scatter = 105,
-  gatherDuration = 1250, trigger = "hover",
+  gatherDuration = 1250, trigger = "hover", align = "center",
 }: ParticleTextProps) {
   const rootRef = useRef<HTMLDivElement>(null)
   const canvasRef = useRef<HTMLCanvasElement>(null)
