@@ -1,7 +1,6 @@
 "use client"
 
 import { useCallback, useEffect, useRef, useState } from "react"
-import { motion, useScroll, useSpring } from "framer-motion"
 import { Volume2, VolumeX, Waves } from "lucide-react"
 
 const chords = [
@@ -35,26 +34,6 @@ export function AmbientExperience() {
   const masterRef = useRef<GainNode | null>(null)
   const chordTimerRef = useRef<number | null>(null)
   const chordIndexRef = useRef(0)
-  const { scrollYProgress } = useScroll()
-  const smoothProgress = useSpring(scrollYProgress, { stiffness: 100, damping: 30, mass: 0.2 })
-
-  useEffect(() => {
-    const sections = Array.from(document.querySelectorAll<HTMLElement>("main > section:not(.hero-stage)"))
-    if (!("IntersectionObserver" in window)) return
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("is-in-view")
-          observer.unobserve(entry.target)
-        }
-      })
-    }, { threshold: 0.12, rootMargin: "0px 0px -7% 0px" })
-    sections.forEach((section) => {
-      section.classList.add("motion-reveal")
-      observer.observe(section)
-    })
-    return () => observer.disconnect()
-  }, [])
 
   const stopSound = useCallback(async () => {
     if (chordTimerRef.current) {
@@ -115,19 +94,12 @@ export function AmbientExperience() {
 
   return (
     <>
-      <motion.div
-        aria-hidden="true"
-        className="scroll-progress"
-        style={{ scaleX: smoothProgress }}
-      />
       <div className="ambient-orbit ambient-orbit-one" aria-hidden="true" />
       <div className="ambient-orbit ambient-orbit-two" aria-hidden="true" />
-      <motion.button
+      <button
         type="button"
         onClick={toggleSound}
         disabled={soundLoading}
-        whileHover={{ y: -2, scale: 1.025 }}
-        whileTap={{ scale: 0.97 }}
         className="soundscape-control liquid-glass"
         aria-label={soundOn ? "Mute calm background music" : "Play calm background music"}
         aria-pressed={soundOn}
@@ -143,7 +115,7 @@ export function AmbientExperience() {
         <span className={soundOn ? "soundscape-wave soundscape-wave-on" : "soundscape-wave"} aria-hidden="true">
           <Waves size={15} strokeWidth={1.5} />
         </span>
-      </motion.button>
+      </button>
     </>
   )
 }
