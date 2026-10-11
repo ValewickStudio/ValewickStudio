@@ -1,6 +1,7 @@
 "use client"
 
 import { motion, useReducedMotion } from "framer-motion"
+import type { CSSProperties } from "react"
 import "./circular-text.css"
 
 type CircularTextProps = {
@@ -31,12 +32,12 @@ export function CircularText({
       animate={reducedMotion || onHover === "pause" ? undefined : { rotate: 360 }}
       transition={{ duration: spinDuration, repeat: Infinity, ease: "linear" }}
       whileHover={reducedMotion ? undefined : { rotate: 360, scale: onHover === "goBonkers" ? 0.92 : 1.04, transition: { rotate: { duration: hoverDuration, repeat: Infinity, ease: "linear" }, scale: { duration: 0.3 } } }}
-      style={{ "--circular-letter-count": letters.length } as React.CSSProperties}
+      style={{ "--circular-letter-count": letters.length } as CSSProperties}
     >
       {letters.map((letter, index) => (
         <span
           key={`${letter}-${index}`}
-          style={{ transform: `rotate(${(360 / letters.length) * index}deg) translateY(-42px)` }}
+          style={{ transform: `translate(-50%, -50%) rotate(${(360 / letters.length) * index}deg) translateY(-42px) rotate(-${(360 / letters.length) * index}deg)` }}
           aria-hidden="true"
         >
           {letter}
