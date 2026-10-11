@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react"
 import { AnimatePresence, motion } from "framer-motion"
 import { ArrowUpRight, Pause, Play, Volume2, VolumeX, X } from "lucide-react"
 import { showcaseVideos } from "@/lib/site-config"
-import { BlurText } from "@/components/react-bits/blur-text"
+import { FoldText } from "@/components/react-bits/fold-text"
 
 export function Works() {
   const [activeVideo, setActiveVideo] = useState<(typeof showcaseVideos)[number] | null>(null)
@@ -59,7 +59,7 @@ export function Works() {
     <section id="distortion-gallery" className="relative border-t border-white/10 px-6 py-24 md:px-12 md:py-28">
       <div className="mx-auto max-w-6xl">
         <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }} transition={{ duration: 0.7 }} className="mb-12 flex items-end justify-between gap-6 md:mb-16">
-          <div><p className="mb-4 font-mono text-xs tracking-[0.3em] text-muted-foreground">04 — DISTORTION GALLERY</p><h2 className="text-4xl font-light italic tracking-tight md:text-6xl"><BlurText text="Selected campaigns." delay={55} /></h2></div>
+          <div><p className="mb-4 font-mono text-xs tracking-[0.3em] text-muted-foreground">04 — DISTORTION GALLERY</p><h2 className="text-4xl font-light tracking-tight md:text-6xl"><FoldText text="Selected campaigns." splitBy="word" fontSize="inherit" fontWeight={300} className="font-sans" /></h2></div>
           <span className="hidden font-mono text-xs tracking-widest text-muted-foreground md:block">SELECT / WATCH</span>
         </motion.div>
         <div className="grid gap-5 md:grid-cols-3">
