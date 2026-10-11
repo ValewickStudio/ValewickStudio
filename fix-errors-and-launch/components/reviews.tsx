@@ -20,12 +20,12 @@ export function ReviewCapsule() {
 
   return (
     <section id="reviews" className="relative isolate overflow-hidden border-t border-white/10 px-6 py-24 md:px-12 md:py-28">
-      <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_78%_35%,rgba(255,255,255,0.075),transparent_58%)]" />
+      <div aria-hidden="true" className="pointer-events-none absolute right-[8%] top-[18%] -z-10 size-64 rounded-full bg-white/[0.035] blur-3xl" />
       <div className="mx-auto max-w-6xl">
         <div className="grid gap-10 lg:grid-cols-[1fr_.7fr] lg:items-end">
           <motion.div initial={{ opacity: 0, y: reduceMotion ? 0 : 22 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }}>
             <p className="mb-4 font-mono text-xs tracking-[0.3em] text-muted-foreground">10 — TRUST, WITHOUT THE THEATRE</p>
-            <h2 className="text-4xl font-light tracking-tight md:text-6xl">Good work.<br /><span className="italic">Clear expectations.</span></h2>
+            <h2 className="text-4xl font-light tracking-tight md:text-6xl"><BlurText text="Good work." delay={70} /><br /><span className="italic"><BlurText text="Clear expectations." delay={85} direction="top" /></span></h2>
             <p className="mt-6 max-w-lg text-sm leading-7 text-muted-foreground">A thoughtful collaboration is built in the details: an honest scope, direct communication, and work made with care. Here&apos;s what you can expect from us.</p>
           </motion.div>
           <motion.aside initial={{ opacity: 0, y: reduceMotion ? 0 : 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.65, delay: 0.1 }} className="liquid-glass rounded-2xl p-6 md:p-7">
@@ -42,7 +42,7 @@ export function ReviewCapsule() {
           </div>
         </div>
         <div className="mt-12 grid gap-4 md:grid-cols-3">
-          {commitments.map((item, index) => <motion.article key={item.number} initial={{ opacity: 0, y: reduceMotion ? 0 : 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.55, delay: index * 0.09 }} whileHover={reduceMotion ? undefined : { y: -5 }} className="liquid-glass rounded-2xl border border-white/10 p-6 md:p-7"><p className="font-mono text-[10px] tracking-[0.2em] text-muted-foreground">{item.number} / OUR APPROACH</p><h3 className="mt-7 text-2xl font-light tracking-tight">{item.title}</h3><p className="mt-4 font-mono text-xs leading-6 text-muted-foreground">{item.copy}</p></motion.article>)}
+          {commitments.map((item, index) => <motion.article key={item.number} initial={{ opacity: 0, y: reduceMotion ? 0 : 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.55, delay: index * 0.09 }} whileHover={reduceMotion ? undefined : { y: -5 }} className="liquid-glass spotlight-card glare-hover rounded-2xl border border-white/10 p-6 md:p-7"><p className="font-mono text-[10px] tracking-[0.2em] text-muted-foreground">{item.number} / OUR APPROACH</p><h3 className="mt-7 text-2xl font-light tracking-tight">{item.title}</h3><p className="mt-4 font-mono text-xs leading-6 text-muted-foreground">{item.copy}</p></motion.article>)}
         </div>
         <motion.a initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.6 }} href="#apply" className="group mt-9 inline-flex items-center gap-3 font-mono text-xs tracking-widest">LET'S BUILD YOUR NEXT CHAPTER <ArrowUpRight aria-hidden="true" className="size-4 transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1" /></motion.a>
       </div>
