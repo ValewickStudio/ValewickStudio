@@ -25,7 +25,7 @@ export function About() {
         {/* Brand statements */}
         <div className="flex flex-col">
           {statements.map(([label, statement], index) => (
-            <motion.div key={label} initial={{ opacity: 0, y: reduceMotion ? 0 : 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.4 }} transition={{ duration: 0.65, delay: index * 0.06 }} className="liquid-glass group grid gap-4 border-t border-white/10 px-5 py-8 md:grid-cols-[180px_1fr] md:px-7 md:py-10">
+            <motion.div key={label} initial={{ opacity: 0, y: reduceMotion ? 0 : 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.4 }} transition={{ duration: 0.65, delay: index * 0.06 }} className="liquid-glass spotlight-card glare-hover group grid gap-4 border-t border-white/10 px-5 py-8 md:grid-cols-[180px_1fr] md:px-7 md:py-10">
               <span className="font-mono text-xs tracking-widest text-muted-foreground">{label.toUpperCase()}</span>
               <p className="max-w-3xl text-2xl font-light leading-snug tracking-tight transition-transform duration-500 group-hover:translate-x-2 md:text-4xl">{statement}</p>
             </motion.div>
