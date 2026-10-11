@@ -1195,3 +1195,44 @@ body, html { background: #080909; }
   .site-glare-target:hover::after { display:none; }
   .site-shine-target { animation:none; background-image:none; -webkit-text-fill-color:currentColor; color:inherit; }
 }
+
+
+/* Header and sound control: consistent quiet, monochrome liquid-glass treatment. */
+.glass-nav {
+  position: relative;
+  isolation: isolate;
+  background: rgba(18, 18, 17, .76) !important;
+  border: 1px solid rgba(244, 241, 233, .15) !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.075), 0 18px 54px rgba(0,0,0,.32) !important;
+  -webkit-backdrop-filter: blur(26px) saturate(135%) !important;
+  backdrop-filter: blur(26px) saturate(135%) !important;
+}
+.glass-nav-scrolled {
+  background: rgba(12, 12, 11, .9) !important;
+  border-color: rgba(244,241,233,.2) !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.08), 0 20px 58px rgba(0,0,0,.42) !important;
+}
+.glass-nav button { white-space: nowrap; }
+.mobile-nav-overlay {
+  background: rgba(9, 9, 8, .96) !important;
+  -webkit-backdrop-filter: blur(28px) saturate(120%);
+  backdrop-filter: blur(28px) saturate(120%);
+}
+.soundscape-control {
+  background: rgba(18, 18, 17, .86) !important;
+  border-color: rgba(244,241,233,.17) !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.075), 0 14px 42px rgba(0,0,0,.32) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(135%) !important;
+  backdrop-filter: blur(24px) saturate(135%) !important;
+}
+.soundscape-control:hover {
+  border-color: rgba(244,241,233,.3) !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.1), 0 18px 46px rgba(0,0,0,.38) !important;
+}
+.soundscape-control:focus-visible {
+  outline: 2px solid rgba(244,241,233,.8);
+  outline-offset: 4px;
+}
+@media (max-width: 640px) {
+  .glass-nav { width: calc(100% - 4px); }
+}
