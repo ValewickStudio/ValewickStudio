@@ -8,6 +8,7 @@ import { TrustpilotNote } from "@/components/reviews"
 import { TextType } from "@/components/react-bits/text-type"
 import { FoldText } from "@/components/react-bits/fold-text"
 import { ParticleText } from "@/components/react-bits/particle-text"
+import { ShinyText } from "@/components/react-bits/shiny-text"
 
 
 export function Hero() {
@@ -40,7 +41,7 @@ export function Hero() {
             <br />
             <ParticleText text="Real ambition." align="left" fontSize="clamp(2.5rem, 6.5vw, 6.5rem)" fontWeight={300} color="#f4f0e8" scatter={115} gatherDuration={1450} trigger="hover" />
           </h2>
-          <p className="mt-5 min-h-12 max-w-sm font-mono text-xs leading-6 text-muted-foreground"><TextType text={["Websites with purpose.", "Creative that connects.", "Systems that work smarter."]} typingSpeed={48} deletingSpeed={24} pauseDuration={1500} initialDelay={650} /></p><p className="mt-4 max-w-sm font-mono text-[10px] leading-5 tracking-[0.12em] text-white/55">CLEAR SCOPE · RESPONSIVE BUILD · HUMAN SUPPORT</p>
+          <p className="mt-5 min-h-12 max-w-sm font-mono text-xs leading-6 text-muted-foreground"><ShinyText trigger="loop" speed={4.5} color="currentColor" shineColor="#ffffff"><TextType text={["Websites with purpose.", "Creative that connects.", "Systems that work smarter."]} typingSpeed={48} deletingSpeed={24} pauseDuration={1500} initialDelay={650} /></ShinyText></p><p className="mt-4 max-w-sm font-mono text-[10px] leading-5 tracking-[0.12em] text-white/55">CLEAR SCOPE · RESPONSIVE BUILD · HUMAN SUPPORT</p>
           <a href="#concept" className="liquid-glass mt-6 inline-flex min-h-11 items-center rounded-full border border-white/20 px-5 py-3 font-mono text-[10px] tracking-[0.12em] text-white/85 transition-colors hover:border-white hover:bg-white hover:text-black">EXPLORE THE $50 HOMEPAGE CONCEPT →</a>
           <motion.div
             initial={{ opacity: 0, y: 16 }}
