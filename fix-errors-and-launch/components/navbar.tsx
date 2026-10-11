@@ -36,11 +36,9 @@ export function Navbar() {
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          isScrolled ? "bg-background/80 backdrop-blur-md border-b border-border" : ""
-        }`}
+        className="fixed inset-x-0 top-0 z-50 px-3 pt-3 transition-all duration-500 md:px-8 md:pt-5"
       >
-        <nav className="flex items-center justify-between px-6 py-4 my-0 md:px-12 md:py-5">
+        <nav className={`glass-nav mx-auto flex max-w-[1440px] items-center justify-between rounded-full px-5 py-3 transition-all duration-500 md:px-8 md:py-3.5 ${isScrolled ? "shadow-[0_18px_60px_rgba(0,0,0,0.36)]" : "bg-black/10"}`}>
           {/* Logo */}
           <a
             href="#"
@@ -58,12 +56,12 @@ export function Navbar() {
           </a>
 
           {/* Desktop Navigation */}
-          <motion.ul initial="hidden" animate="visible" variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.12, delayChildren: 0.3 } } }} className="hidden md:flex items-center gap-8">
+          <motion.ul initial="hidden" animate="visible" variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.12, delayChildren: 0.3 } } }} className="hidden md:flex items-center gap-6 lg:gap-8">
             {navLinks.map((link, index) => (
               <motion.li key={link.label} variants={{ hidden: { opacity: 0, y: -8 }, visible: { opacity: 1, y: 0, transition: { duration: 0.45 } } }}>
                 <button
                   onClick={() => scrollToSection(link.href)}
-                  className="group relative font-mono text-xs tracking-wider text-muted-foreground hover:text-foreground transition-colors duration-300"
+                  className="group relative font-mono text-[10px] tracking-[0.16em] text-white/65 hover:text-white transition-colors duration-300 lg:text-[11px]"
                 >
                   <span className="text-accent mr-1">0{index + 1}</span>
                   {link.label.toUpperCase()}
@@ -79,7 +77,7 @@ export function Navbar() {
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75" />
               <span className="relative inline-flex rounded-full h-2 w-2 bg-accent" />
             </span>
-            <span className="font-mono text-xs tracking-wider text-muted-foreground">AVAILABLE FOR WORK</span>
+            <span className="font-mono text-[10px] tracking-[0.14em] text-white/65">AVAILABLE FOR WORK</span>
           </div>
 
           {/* Mobile Menu Button */}
