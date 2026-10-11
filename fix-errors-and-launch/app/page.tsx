@@ -12,6 +12,7 @@ import { WebsitePackages } from "@/components/website-packages"
 import { ProjectEnquiry } from "@/components/project-enquiry"
 import { LoadingIntro } from "@/components/loading-intro"
 import { ReviewCapsule } from "@/components/reviews"
+import { AmbientBackdrop } from "@/components/ambient-backdrop"
 
 export const metadata: Metadata = {
   title: "Websites, Creative & Digital Systems",
@@ -22,6 +23,7 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <SmoothScroll>
+      <AmbientBackdrop />
       <LoadingIntro />
       <Navbar />
       <main>
