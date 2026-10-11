@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react"
 import { AnimatePresence, motion } from "framer-motion"
 import { ArrowUpRight, Pause, Play, Volume2, VolumeX, X } from "lucide-react"
 import { showcaseVideos } from "@/lib/site-config"
+import { BlurText } from "@/components/react-bits/blur-text"
 
 export function Works() {
   const [activeVideo, setActiveVideo] = useState<(typeof showcaseVideos)[number] | null>(null)
@@ -58,16 +59,16 @@ export function Works() {
     <section id="distortion-gallery" className="relative border-t border-white/10 px-6 py-24 md:px-12 md:py-28">
       <div className="mx-auto max-w-6xl">
         <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }} transition={{ duration: 0.7 }} className="mb-12 flex items-end justify-between gap-6 md:mb-16">
-          <div><p className="mb-4 font-mono text-xs tracking-[0.3em] text-muted-foreground">04 — DISTORTION GALLERY</p><h2 className="text-4xl font-light italic tracking-tight md:text-6xl">Selected campaigns.</h2></div>
+          <div><p className="mb-4 font-mono text-xs tracking-[0.3em] text-muted-foreground">04 — DISTORTION GALLERY</p><h2 className="text-4xl font-light italic tracking-tight md:text-6xl"><BlurText text="Selected campaigns." delay={55} /></h2></div>
           <span className="hidden font-mono text-xs tracking-widest text-muted-foreground md:block">SELECT / WATCH</span>
         </motion.div>
         <div className="grid gap-5 md:grid-cols-3">
           {showcaseVideos.map((project, index) => (
-            <motion.article key={project.id} initial={{ opacity: 0, y: 36 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.15 }} transition={{ duration: 0.65, delay: index * 0.1 }} whileHover={{ y: -8 }} className="liquid-glass group rounded-2xl border border-white/10 p-3">
+            <motion.article key={project.id} initial={{ opacity: 0, y: 36 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.15 }} transition={{ duration: 0.65, delay: index * 0.1 }} whileHover={{ y: -8 }} className="liquid-glass spotlight-card glare-hover group rounded-2xl border border-white/10 p-3">
               <button type="button" onClick={() => setActiveVideo(project)} className="block w-full text-left" data-cursor-hover aria-label={`Watch ${project.title}`}>
                 <div className="relative aspect-[4/5] overflow-hidden rounded-xl bg-white/5">
                   <video src={project.src} muted playsInline preload="metadata" className="h-full w-full object-cover transition duration-1000 ease-out group-hover:scale-110 group-hover:saturate-125" aria-label={`${project.title} preview`} />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+                  <div className="absolute inset-0 bg-black/25" />
                   <span className="absolute right-3 top-3 border border-white/30 bg-black/50 px-2 py-1 font-mono text-[10px] tracking-widest">{project.number}</span>
                   <span className="absolute bottom-4 left-4 flex items-center gap-2 font-mono text-[10px] tracking-widest text-white">WATCH PROJECT <ArrowUpRight className="size-3" /></span>
                 </div>
