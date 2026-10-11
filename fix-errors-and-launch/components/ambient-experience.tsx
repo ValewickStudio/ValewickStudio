@@ -4,8 +4,6 @@ import { useCallback, useEffect, useRef, useState } from "react"
 import { motion, useScroll, useSpring } from "framer-motion"
 import { Volume2, VolumeX, Waves } from "lucide-react"
 
-type SoundContext = AudioContext & { webkitAudioContext?: never }
-
 const chords = [
   [220, 261.63, 329.63, 392],
   [196, 246.94, 293.66, 369.99],
