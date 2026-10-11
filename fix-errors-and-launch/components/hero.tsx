@@ -5,6 +5,7 @@ import { motion, useScroll, useTransform } from "framer-motion"
 import { SentientSphere } from "./sentient-sphere"
 import { prefillEnquiry } from "@/lib/enquiry-events"
 import { TrustpilotNote } from "@/components/reviews"
+import { TextType } from "@/components/react-bits/text-type"
 
 
 export function Hero() {
@@ -37,7 +38,7 @@ export function Hero() {
             <br />
             <motion.span className="inline-block" initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.46 }}>Real ambition.</motion.span>
           </h2>
-          <p className="mt-5 max-w-sm font-mono text-xs leading-6 text-muted-foreground">Websites, campaign creative, and automation for brands ready for their next chapter.</p><p className="mt-4 max-w-sm font-mono text-[10px] leading-5 tracking-[0.12em] text-white/55">CLEAR SCOPE · RESPONSIVE BUILD · HUMAN SUPPORT</p>
+          <p className="mt-5 min-h-12 max-w-sm font-mono text-xs leading-6 text-muted-foreground"><TextType text={["Websites with purpose.", "Creative that connects.", "Systems that work smarter."]} typingSpeed={48} deletingSpeed={24} pauseDuration={1500} initialDelay={650} /></p><p className="mt-4 max-w-sm font-mono text-[10px] leading-5 tracking-[0.12em] text-white/55">CLEAR SCOPE · RESPONSIVE BUILD · HUMAN SUPPORT</p>
           <a href="#concept" className="liquid-glass mt-6 inline-flex min-h-11 items-center rounded-full border border-white/20 px-5 py-3 font-mono text-[10px] tracking-[0.12em] text-white/85 transition-colors hover:border-white hover:bg-white hover:text-black">EXPLORE THE $50 HOMEPAGE CONCEPT →</a>
           <motion.div
             initial={{ opacity: 0, y: 16 }}
