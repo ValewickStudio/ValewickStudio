@@ -18,7 +18,7 @@ export function Hero() {
   const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.8])
 
   return (
-    <section ref={containerRef} className="relative min-h-[760px] h-[100svh] w-full overflow-hidden bg-[#080807] md:min-h-[820px]">
+    <section ref={containerRef} className="hero-stage relative min-h-[760px] h-[100svh] w-full overflow-hidden md:min-h-[820px]">
       {/* 3D Sphere Background */}
       <div className="absolute inset-0">
         <SentientSphere />
@@ -33,7 +33,7 @@ export function Hero() {
           transition={{ duration: 1, delay: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
         >
           <p className="font-mono text-xs tracking-[0.3em] text-muted-foreground mb-2">01 — VALEWICK HOUSE</p>
-          <h2 className="font-sans text-3xl font-light tracking-tight text-balance md:text-5xl lg:text-6xl">
+          <h2 className="font-sans text-5xl font-light leading-[0.98] tracking-[-0.045em] text-balance md:text-7xl lg:text-[6.5rem]">
             <motion.span className="inline-block" initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.3 }}>Digital presence.</motion.span>
             <br />
             <motion.span className="inline-block italic" initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.46 }}>Real ambition.</motion.span>
