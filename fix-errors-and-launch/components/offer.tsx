@@ -4,6 +4,8 @@ import { useEffect, useState } from "react"
 import { motion, useReducedMotion } from "framer-motion"
 import { prefillEnquiry } from "@/lib/enquiry-events"
 import { BlurText } from "@/components/react-bits/blur-text"
+import { FoldText } from "@/components/react-bits/fold-text"
+import { DepthCarousel } from "@/components/react-bits/depth-carousel"
 
 const services = [
   ["01", "Websites with purpose.", "Custom websites and landing pages shaped around your brand, your audience, and the next step you want them to take."],
@@ -110,12 +112,22 @@ export function Demo() {
       <div className="mx-auto max-w-6xl">
         <motion.div initial={{ opacity: 0, y: reduceMotion ? 0 : 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.75 }}>
           <p className="mb-4 font-mono text-xs tracking-[0.3em] text-muted-foreground">05 — WEBSITE DEMONSTRATIONS</p>
-          <h2 className="text-4xl font-light tracking-tight md:text-6xl">See the details.<br /><span className="italic">Feel the difference.</span></h2>
+          <h2 className="text-4xl font-light tracking-tight md:text-6xl"><FoldText text="See the details." splitBy="word" fontSize="inherit" fontWeight={300} className="font-sans" /><br /><span className="italic"><FoldText text="Feel the difference." splitBy="word" fontSize="inherit" fontWeight={300} className="font-sans" /></span></h2>
           <p className="mt-5 max-w-2xl font-mono text-xs leading-6 text-muted-foreground">Explore two independent, moving site demonstrations. These are examples of digital experiences, not client endorsements.</p>
         </motion.div>
-        <div role="tablist" aria-label="Choose a website demonstration" className="mt-8 flex flex-wrap gap-3">
-          {websiteDemos.map((item, index) => <button key={item.label} id={`demo-tab-${index}`} type="button" role="tab" aria-selected={activeDemo === index} aria-controls="website-demo-panel" onClick={() => { setActiveDemo(index); setDemoStatus("loading") }} className={`liquid-glass rounded-full px-5 py-3 font-mono text-[10px] tracking-wider transition-all duration-300 ${activeDemo === index ? "border-white/45 bg-white/15 text-foreground shadow-[0_0_30px_rgba(255,255,255,0.12)]" : "text-muted-foreground hover:border-white/30 hover:text-foreground"}`}>{item.label}</button>)}
-        </div>
+        <DepthCarousel
+          className="mt-8"
+          activeIndex={activeDemo}
+          onChange={(index) => { setActiveDemo(index); setDemoStatus("loading") }}
+          items={websiteDemos.map((item, index) => ({
+            label: item.label,
+            title: item.label,
+            description: item.description,
+            url: item.url,
+            category: index === 0 ? "HOSPITALITY / STOREFRONT" : "PRODUCT / DIGITAL SYSTEMS",
+            monogram: index === 0 ? "K" : "S",
+          }))}
+        />
         <motion.div key={demo.url} initial={{ opacity: 0, y: reduceMotion ? 0 : 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.55 }} role="tabpanel" id="website-demo-panel" aria-labelledby={`demo-tab-${activeDemo}`} className="liquid-glass spotlight-card glare-hover mt-5 overflow-hidden rounded-2xl p-2 shadow-2xl shadow-black/30 md:p-4">
           <div className="flex items-center gap-2 border-b border-white/10 px-3 pb-3 pt-2"><span className="size-2 rounded-full bg-white/25" /><span className="size-2 rounded-full bg-white/25" /><span className="size-2 rounded-full bg-white/25" /><span className="ml-3 flex-1 truncate rounded-full border border-white/10 bg-black/20 px-4 py-2 font-mono text-[9px] text-muted-foreground">{demo.url.replace("https://", "")}</span><motion.span aria-hidden="true" animate={reduceMotion ? undefined : { opacity: [0.45, 1, 0.45] }} transition={{ duration: 2.4, repeat: Number.POSITIVE_INFINITY }} className="font-mono text-[9px] tracking-wider text-white/50">LIVE DEMO</motion.span></div>
           <div className="relative overflow-hidden rounded-b-xl border border-white/10 bg-black/40 p-1 md:p-2"><div className={`absolute inset-0 z-10 flex items-center justify-center bg-[#101313]/90 transition-opacity duration-500 ${demoStatus === "ready" ? "pointer-events-none opacity-0" : "pointer-events-auto opacity-100"}`}><div className="liquid-glass rounded-2xl px-6 py-5 text-center font-mono text-[10px] tracking-widest text-muted-foreground">{demoStatus === "error" ? <><span className="block text-foreground">PREVIEW BLOCKED BY SITE</span><a href={demo.url} target="_blank" rel="noreferrer" className="mt-3 inline-flex items-center gap-2 rounded-full border border-white/20 px-4 py-2 text-foreground transition-all hover:border-white hover:bg-white hover:text-black">OPEN {demo.label.toUpperCase()} <span aria-hidden="true">↗</span></a></> : <span className="inline-flex items-center gap-2"><span className="size-2 animate-pulse rounded-full bg-foreground" />LOADING LIVE DEMO</span>}</div></div><iframe title={`${demo.label} independent website demonstration`} src={demo.url} loading={activeDemo === 0 ? "eager" : "lazy"} onLoad={() => setDemoStatus("ready")} onError={() => setDemoStatus("error")} className="block h-[420px] min-h-[420px] w-[calc(100%+18px)] max-w-none rounded-lg bg-[#101313] md:h-[min(68vw,680px)] md:min-h-[560px]" /></div>
