@@ -33,7 +33,7 @@ export function AmbientExperience() {
   const [soundLoading, setSoundLoading] = useState(false)
   const contextRef = useRef<AudioContext | null>(null)
   const masterRef = useRef<GainNode | null>(null)
-  const chordTimerRef = useRef<ReturnType<typeof setInterval> | null>(null)
+  const chordTimerRef = useRef<number | null>(null)
   const chordIndexRef = useRef(0)
   const { scrollYProgress } = useScroll()
   const smoothProgress = useSpring(scrollYProgress, { stiffness: 100, damping: 30, mass: 0.2 })
