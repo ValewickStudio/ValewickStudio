@@ -1,6 +1,6 @@
 "use client"
 
-import { useRef, type ReactNode, type PointerEvent } from "react"
+import { useRef, type ReactNode, type PointerEvent, type CSSProperties } from "react"
 
 type Props = { children: ReactNode; className?: string; edgeSensitivity?: number; glowColor?: string; backgroundColor?: string; borderRadius?: number; glowRadius?: number; glowIntensity?: number; coneSpread?: number; animated?: boolean; colors?: string[] }
 
@@ -15,5 +15,5 @@ export default function BorderGlow({ children, className = "", edgeSensitivity =
     event.currentTarget.style.setProperty("--glow-y", `${y}px`)
     event.currentTarget.style.setProperty("--glow-strength", String(Math.max(0, 1 - edge / Math.max(1, edgeSensitivity * 2)) * glowIntensity))
   }
-  return <div ref={ref} onPointerMove={move} className={`border-glow-card ${animated ? "border-glow-intro" : ""} ${className}`} style={{ "--glow-radius": `${borderRadius}px`, "--glow-halo": `${glowRadius}px`, "--glow-bg": backgroundColor, "--glow-color": `hsl(${glowColor} / 1)`, "--glow-a": colors[0], "--glow-b": colors[1], "--glow-c": colors[2], "--glow-strength": 0 } as React.CSSProperties}>{children}</div>
+  return <div ref={ref} onPointerMove={move} className={`border-glow-card ${animated ? "border-glow-intro" : ""} ${className}`} style={{ "--glow-radius": `${borderRadius}px`, "--glow-halo": `${glowRadius}px`, "--glow-bg": backgroundColor, "--glow-color": `hsl(${glowColor.trim().split(/\\s+/).map((value, index) => index === 0 ? value : value.endsWith("%") ? value : `${value}%`).join(" ")} / 1)`, "--glow-a": colors[0], "--glow-b": colors[1], "--glow-c": colors[2], "--glow-strength": 0 } as CSSProperties}>{children}</div>
 }
