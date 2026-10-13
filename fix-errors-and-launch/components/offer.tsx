@@ -5,6 +5,9 @@ import { motion, useReducedMotion } from "framer-motion"
 import { prefillEnquiry } from "@/lib/enquiry-events"
 import { ScrollReveal } from "@/components/react-bits/scroll-reveal"
 import { FoldText } from "@/components/react-bits/fold-text"
+import AnimatedContent from "@/components/react-bits/AnimatedContent"
+import BorderGlow from "@/components/react-bits/BorderGlow"
+import StarBorder from "@/components/react-bits/StarBorder"
 
 const services = [
   ["01", "Websites with purpose.", "Custom websites and landing pages shaped around your brand, your audience, and the next step you want them to take."],
@@ -144,7 +147,10 @@ export function Demo() {
           ))}
         </div>
 
-        <div className="website-selector-frame overflow-hidden rounded-2xl border border-white/15 bg-[#090a09] shadow-2xl shadow-black/30" role="tabpanel" id="website-demo-panel" aria-labelledby={`demo-tab-${activeDemo}`}>
+        <AnimatedContent distance={42} direction="vertical" duration={0.9} ease="power3.out" initialOpacity={0.08} scale={0.985} threshold={0.1}>
+          <BorderGlow edgeSensitivity={36} glowColor="42 30 8" backgroundColor="#090a09" borderRadius={24} glowRadius={30} glowIntensity={1.15} coneSpread={30} animated colors={["#d7c39a", "#ffffff", "#9b8c6b"]}>
+          <StarBorder as="div" color="#e7d7b3" trailColor="#ffffff" duration={8} direction="clockwise" stars={2} trailLength={0.16} thickness={1} radius={18} glow={0.32} hover="brighten" clickPulse={false} theme="dark">
+          <div className="website-selector-frame overflow-hidden rounded-2xl border border-white/15 bg-[#090a09] shadow-2xl shadow-black/30" role="tabpanel" id="website-demo-panel" aria-labelledby={`demo-tab-${activeDemo}`}>
           <div className="flex min-h-12 items-center gap-2 border-b border-white/10 bg-white/[.035] px-3 md:px-5">
             <span className="size-2 rounded-full bg-white/25" /><span className="size-2 rounded-full bg-white/25" /><span className="size-2 rounded-full bg-white/25" />
             <span className="ml-2 min-w-0 flex-1 truncate rounded-lg border border-white/10 bg-black/20 px-3 py-2 font-mono text-[10px] text-white/55">{demo.url.replace(/^https?:\/\//, "")}</span>
@@ -161,6 +167,9 @@ export function Demo() {
             )}
           </div>
         </div>
+          </StarBorder>
+          </BorderGlow>
+        </AnimatedContent>
 
         <div className="mt-5 flex flex-col gap-5 border-b border-white/10 pb-7 sm:flex-row sm:items-start sm:justify-between">
           <div className="max-w-2xl">
