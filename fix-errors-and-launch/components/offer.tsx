@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react"
 import { motion, useReducedMotion } from "framer-motion"
 import { prefillEnquiry } from "@/lib/enquiry-events"
-import { BlurText } from "@/components/react-bits/blur-text"
+import { ScrollReveal } from "@/components/react-bits/scroll-reveal"
 import { FoldText } from "@/components/react-bits/fold-text"
 import { CardSwap } from "@/components/react-bits/card-swap"
 
@@ -33,7 +33,7 @@ export function Services() {
     <section id="systems" className="border-t border-white/10 px-6 py-24 md:px-12 md:py-28">
       <motion.div initial={{ opacity: 0, y: reduceMotion ? 0 : 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }} className="mx-auto max-w-6xl">
         <p className="mb-4 font-mono text-xs tracking-[0.3em] text-muted-foreground">03 — WHAT WE BUILD</p>
-        <h2 className="mb-12 text-4xl font-light tracking-tight md:text-6xl"><BlurText text="The pieces." delay={70} /><br /><span className="italic"><BlurText text="The bigger picture." delay={85} direction="top" /></span></h2>
+        <h2 className="mb-12 text-4xl font-light tracking-tight md:text-6xl"><FoldText text="The pieces." splitBy="word" fontSize="inherit" fontWeight={300} /><br /><span className="italic"><FoldText text="The bigger picture." splitBy="word" fontSize="inherit" fontWeight={300} /></span></h2>
         <div className="grid gap-4 md:grid-cols-2">{services.map(([number, title, copy], index) => <motion.article initial={{ opacity: 0, y: reduceMotion ? 0 : 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: index % 2 * 0.08 }} key={number} className="liquid-glass spotlight-card glare-hover group rounded-2xl border border-white/10 p-6 transition-colors duration-500 hover:border-white/30 hover:bg-white/[0.03] md:p-8"><span className="font-mono text-xs text-muted-foreground">{number}</span><h3 className="mt-8 text-3xl font-light">{title}</h3><p className="mt-4 max-w-md font-mono text-xs leading-7 text-muted-foreground">{copy}</p><a href="#apply" className="mt-8 inline-block font-mono text-[10px] tracking-widest transition-transform duration-300 group-hover:translate-x-1">LET’S TALK ABOUT IT →</a></motion.article>)}</div>
       </motion.div>
     </section>
@@ -54,7 +54,7 @@ export function VideoAndCareServices() {
     <section id="ongoing-services" className="border-t border-white/10 px-6 py-24 md:px-12 md:py-28">
       <div className="mx-auto max-w-6xl">
         <motion.div initial={{ opacity: 0, y: reduceMotion ? 0 : 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }} className="mb-12 grid gap-6 md:grid-cols-[1.1fr_.9fr] md:items-end">
-          <div><p className="mb-4 font-mono text-xs tracking-[0.3em] text-muted-foreground">04 — VIDEO, CARE & CONTINUITY</p><h2 className="text-4xl font-light tracking-tight md:text-6xl"><BlurText text="Good work," delay={60} /> <span className="italic"><BlurText text="kept in motion." delay={80} direction="top" /></span></h2></div>
+          <div><p className="mb-4 font-mono text-xs tracking-[0.3em] text-muted-foreground">04 — VIDEO, CARE & CONTINUITY</p><h2 className="text-4xl font-light tracking-tight md:text-6xl"><FoldText text="Good work," splitBy="word" fontSize="inherit" fontWeight={300} /> <span className="italic"><FoldText text="kept in motion." splitBy="word" fontSize="inherit" fontWeight={300} /></span></h2></div>
           <p className="max-w-lg font-mono text-xs leading-7 text-muted-foreground">From a single cinematic piece to ongoing support, we shape each engagement around what your business needs next. Every scope is discussed before work begins.</p>
         </motion.div>
 
