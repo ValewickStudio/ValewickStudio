@@ -9,56 +9,32 @@ import { TextType } from "@/components/react-bits/text-type"
 import { FoldText } from "@/components/react-bits/fold-text"
 import { ShinyText } from "@/components/react-bits/shiny-text"
 
-
 export function Hero() {
   const containerRef = useRef<HTMLElement>(null)
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end start"],
-  })
-
+  const { scrollYProgress } = useScroll({ target: containerRef, offset: ["start start", "end start"] })
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0])
   const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.8])
 
   return (
     <section ref={containerRef} className="hero-stage relative min-h-[760px] h-[100svh] w-full overflow-hidden md:min-h-[820px]">
-      {/* 3D Sphere Background */}
       <div className="hero-sphere-layer pointer-events-none absolute inset-0 z-0" aria-hidden="true">
         <div className="hero-sphere-fallback" />
-        <div className="absolute right-[-8%] top-[47%] h-[min(76vh,760px)] w-[min(70vw,760px)] -translate-y-1/2 md:right-[0%] md:w-[min(62vw,760px)]">
+        <div className="absolute left-1/2 top-1/2 h-[min(88vh,940px)] w-[min(88vw,940px)] -translate-x-1/2 -translate-y-1/2 sm:h-[min(92vh,1040px)] sm:w-[min(92vw,1040px)]">
           <CrystalizedBall preset="eclipse" color="#FFFFFF" size={0.7} crackle={0.5} fill={0.5} interactive hoverStrength={0.7} strands={4} flares={0.4} glow={0.7} sparks={0.35} particleCount={14000} motion="drift" depth={0.7} haze={0.5} dustSpeed={0.8} speed={0.62} className="h-full w-full" />
         </div>
       </div>
 
-      {/* Typography Overlay */}
       <motion.div style={{ opacity, scale }} className="relative z-10 flex h-full flex-col justify-between px-6 pb-20 pt-28 md:px-12 md:pb-24 md:pt-32">
-        {/* Top Left */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
-        >
+        <motion.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, delay: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}>
           <h2 className="font-sans text-5xl font-light leading-[0.98] tracking-[-0.045em] text-balance md:text-7xl lg:text-[6.5rem]">
-            <ShinyText trigger="loop" speed={6} color="#f4f0e8" shineColor="#ffffff">Digital presence.</ShinyText>
-            <br />
+            <ShinyText trigger="loop" speed={6} color="#f4f0e8" shineColor="#ffffff">Digital presence.</ShinyText><br />
             <ShinyText trigger="loop" speed={5.5} color="#f4f0e8" shineColor="#ffffff">Real ambition.</ShinyText>
           </h2>
-          <p className="mt-5 min-h-6 w-fit max-w-full font-mono text-xs leading-6 text-muted-foreground"><ShinyText trigger="loop" speed={4.5} color="currentColor" shineColor="#ffffff"><TextType text={["Websites with purpose.", "Creative that connects.", "Systems that work smarter."]} typingSpeed={48} deletingSpeed={24} pauseDuration={1500} initialDelay={650} /></ShinyText></p><p className="mt-4 max-w-sm font-mono text-[10px] leading-5 tracking-[0.12em] text-white/55">CLEAR SCOPE · RESPONSIVE BUILD · HUMAN SUPPORT</p>
+          <p className="mt-5 min-h-6 w-fit max-w-full font-mono text-xs leading-6 text-muted-foreground"><ShinyText trigger="loop" speed={4.5} color="currentColor" shineColor="#ffffff"><TextType text={["Websites with purpose.", "Creative that connects.", "Systems that work smarter."]} typingSpeed={48} deletingSpeed={24} pauseDuration={1500} initialDelay={650} /></ShinyText></p>
+          <p className="mt-4 max-w-sm font-mono text-[10px] leading-5 tracking-[0.12em] text-white/55">CLEAR SCOPE · RESPONSIVE BUILD · HUMAN SUPPORT</p>
           <a href="#concept" className="liquid-glass mt-6 inline-flex min-h-11 items-center rounded-full border border-white/20 px-5 py-3 font-mono text-[10px] tracking-[0.12em] text-white/85 transition-colors hover:border-white hover:bg-white hover:text-black">EXPLORE THE $50 HOMEPAGE CONCEPT →</a>
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.72, ease: [0.25, 0.46, 0.45, 0.94] }}
-            className="mt-7 flex flex-col items-start gap-3"
-          >
-            <motion.a
-              href="#apply"
-              onClick={() => prefillEnquiry("Website", "Lite")}
-              data-cursor-hover
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.98 }}
-              className="liquid-glass group relative flex min-w-[17rem] flex-col items-start rounded-full border border-white/20 px-8 py-4 font-mono text-sm uppercase tracking-widest transition-colors duration-300 hover:border-white hover:bg-white hover:text-black"
-            >
+          <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.72, ease: [0.25, 0.46, 0.45, 0.94] }} className="mt-7 flex flex-col items-start gap-3">
+            <motion.a href="#apply" onClick={() => prefillEnquiry("Website", "Lite")} data-cursor-hover whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }} className="liquid-glass group relative flex min-w-[17rem] flex-col items-start rounded-full border border-white/20 px-8 py-4 font-mono text-sm uppercase tracking-widest transition-colors duration-300 hover:border-white hover:bg-white hover:text-black">
               <span className="whitespace-nowrap">Start with Lite — $299</span>
               <span className="mt-2 block text-left text-[9px] tracking-[0.18em] text-white/50 transition-colors group-hover:text-black/60">A focused launch, without the guesswork</span>
             </motion.a>
@@ -66,23 +42,15 @@ export function Hero() {
           </motion.div>
         </motion.div>
 
-        {/* Bottom Right */}
-        <motion.div
-          initial={{ opacity: 0, y: -40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
-          className="self-end text-right"
-        >
+        <motion.div initial={{ opacity: 0, y: -40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, delay: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }} className="self-end text-right">
           <p className="mb-2 font-mono text-xs tracking-[0.3em] text-muted-foreground">YOUR NEXT CHAPTER<span aria-hidden="true" className="chapter-ellipsis" /></p>
           <h2 className="font-sans text-3xl font-light tracking-tight text-balance md:text-5xl lg:text-6xl">
-            <FoldText text="Made to stand out." splitBy="word" stagger={0.045} fontSize="inherit" fontWeight={300} className="font-sans" />
-            <br />
+            <FoldText text="Made to stand out." splitBy="word" stagger={0.045} fontSize="inherit" fontWeight={300} className="font-sans" /><br />
             <FoldText text="Built to grow." splitBy="word" stagger={0.065} fontSize="inherit" fontWeight={300} className="font-sans" />
           </h2>
           <div className="mt-6 flex justify-end"><TrustpilotNote /></div>
         </motion.div>
       </motion.div>
-
     </section>
   )
 }
