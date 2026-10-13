@@ -1,0 +1,4 @@
+.scroll-reveal{margin:20px 0;will-change:transform}
+.scroll-reveal-text{margin:0;font-size:clamp(1rem,1.4vw,1.1rem);line-height:1.9;font-weight:400}
+.scroll-reveal-word{display:inline-block;will-change:opacity,filter}
+@media(prefers-reduced-motion:reduce){.scroll-reveal,.scroll-reveal-word{transform:none!important;filter:none!important;opacity:1!important;will-change:auto}}
