@@ -138,20 +138,20 @@ export function Demo() {
 
         <div className="website-selector-list mb-5 flex gap-2 overflow-x-auto pb-2" role="tablist" aria-label="Choose a website demonstration">
           {websiteDemos.map((site, index) => (
-            <button key={site.label} id={\`demo-tab-\${index}\`} type="button" role="tab" aria-selected={activeDemo === index} aria-controls="website-demo-panel" onClick={() => selectDemo(index)} className={\`website-selector-tab shrink-0 rounded-full border px-4 py-3 text-left transition-colors duration-200 \${activeDemo === index ? "is-active border-white/50 bg-white/[.09] text-white" : "border-white/10 bg-white/[.02] text-white/50 hover:text-white/80"}\`}>
+            <button key={site.label} id={`demo-tab-${index}`} type="button" role="tab" aria-selected={activeDemo === index} aria-controls="website-demo-panel" onClick={() => selectDemo(index)} className={`website-selector-tab shrink-0 rounded-full border px-4 py-3 text-left transition-colors duration-200 ${activeDemo === index ? "is-active border-white/50 bg-white/[.09] text-white" : "border-white/10 bg-white/[.02] text-white/50 hover:text-white/80"}`}>
               <span className="mr-2 font-mono text-[9px] opacity-60">{String(index + 1).padStart(2, "0")}</span><span className="text-xs">{site.label}</span>
             </button>
           ))}
         </div>
 
-        <div className="website-selector-frame overflow-hidden rounded-2xl border border-white/15 bg-[#090a09] shadow-2xl shadow-black/30" role="tabpanel" id="website-demo-panel" aria-labelledby={\`demo-tab-\${activeDemo}\`}>
+        <div className="website-selector-frame overflow-hidden rounded-2xl border border-white/15 bg-[#090a09] shadow-2xl shadow-black/30" role="tabpanel" id="website-demo-panel" aria-labelledby={`demo-tab-${activeDemo}`}>
           <div className="flex min-h-12 items-center gap-2 border-b border-white/10 bg-white/[.035] px-3 md:px-5">
             <span className="size-2 rounded-full bg-white/25" /><span className="size-2 rounded-full bg-white/25" /><span className="size-2 rounded-full bg-white/25" />
             <span className="ml-2 min-w-0 flex-1 truncate rounded-lg border border-white/10 bg-black/20 px-3 py-2 font-mono text-[10px] text-white/55">{demo.url.replace(/^https?:\/\//, "")}</span>
             <span className="hidden font-mono text-[9px] tracking-[.16em] text-white/40 sm:block">LIVE PREVIEW</span>
           </div>
           <div className="website-selector-viewport relative aspect-[4/3] min-h-[340px] overflow-hidden bg-[#0b0c0b] md:aspect-[16/9] md:min-h-[540px]">
-            <iframe key={demo.url} title={\`\${demo.label} website demonstration\`} src={demo.url} loading="eager" onLoad={() => setDemoStatus("ready")} onError={() => setDemoStatus("error")} referrerPolicy="strict-origin-when-cross-origin" className="website-selector-iframe absolute inset-0 h-full w-full border-0 bg-white" />
+            <iframe key={demo.url} title={`${demo.label} website demonstration`} src={demo.url} loading="eager" onLoad={() => setDemoStatus("ready")} onError={() => setDemoStatus("error")} referrerPolicy="strict-origin-when-cross-origin" className="website-selector-iframe absolute inset-0 h-full w-full border-0 bg-white" />
             {demoStatus !== "ready" && (
               <div className="absolute inset-0 z-10 flex items-center justify-center bg-[#0b0c0b]/95 p-6 text-center">
                 <div className="max-w-sm font-mono text-[10px] leading-6 tracking-widest text-white/50">
