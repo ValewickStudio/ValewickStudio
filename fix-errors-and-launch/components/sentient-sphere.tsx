@@ -91,13 +91,13 @@ function Sphere() {
     varying float vDisplacement;
     
     void main() {
-      float intensity = 0.3 + vDisplacement * 2.0;
-      vec3 color = vec3(intensity);
+      float intensity = 0.48 + vDisplacement * 2.6;
+      vec3 color = vec3(intensity * 0.94, intensity * 0.92, intensity * 0.88);
       
       float line = smoothstep(0.0, 0.02, abs(fract(vUv.x * 20.0) - 0.5));
       line *= smoothstep(0.0, 0.02, abs(fract(vUv.y * 20.0) - 0.5));
       
-      gl_FragColor = vec4(color * (1.0 - line * 0.5), 0.6);
+      gl_FragColor = vec4(color * (1.0 - line * 0.5), 0.88);
     }
   `
 
@@ -116,7 +116,7 @@ function Sphere() {
 
   return (
     <mesh ref={meshRef}>
-      <icosahedronGeometry args={[1.8, 64]} />
+      <icosahedronGeometry args={[2.05, 64]} />
       <shaderMaterial
         ref={materialRef}
         vertexShader={vertexShader}
@@ -147,7 +147,7 @@ export function SentientSphere() {
   return (
     <Canvas
       camera={{ position: [0, 0, 5], fov: 45 }}
-      className="w-full my-0 h-full py-0"
+      className="!absolute inset-0 !h-full !w-full !p-0"
       dpr={[1, 2]}
       gl={{
         antialias: true,
