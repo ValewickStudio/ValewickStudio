@@ -103,39 +103,77 @@ const websiteDemos = [
 
 export function Demo() {
   const reduceMotion = useReducedMotion()
+  const [activeDemo, setActiveDemo] = useState(0)
+  const [demoStatus, setDemoStatus] = useState<"loading" | "ready" | "error">("loading")
+  const demo = websiteDemos[activeDemo]
+
+  useEffect(() => {
+    setDemoStatus("loading")
+    const timeout = window.setTimeout(() => setDemoStatus((status) => status === "loading" ? "error" : status), 10000)
+    return () => window.clearTimeout(timeout)
+  }, [demo.url])
+
+  const selectDemo = (index: number) => {
+    if (index === activeDemo) return
+    setActiveDemo((index + websiteDemos.length) % websiteDemos.length)
+    setDemoStatus("loading")
+  }
+  const previous = () => selectDemo((activeDemo - 1 + websiteDemos.length) % websiteDemos.length)
+  const next = () => selectDemo((activeDemo + 1) % websiteDemos.length)
+
   return (
-    <section id="work" className="website-demo-section border-t border-white/10 px-5 py-20 md:px-12 md:py-28">
-      <div className="mx-auto max-w-7xl">
-        <motion.div initial={{ opacity: 0, y: reduceMotion ? 0 : 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.75 }} className="mb-10 grid gap-5 md:mb-14 md:grid-cols-[1fr_auto] md:items-end">
+    <section id="work" className="website-selector-section border-t border-white/10 px-5 py-20 md:px-12 md:py-28">
+      <div className="mx-auto max-w-6xl">
+        <motion.div initial={{ opacity: 0, y: reduceMotion ? 0 : 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.65 }} className="mb-8 grid gap-5 md:mb-10 md:grid-cols-[1fr_auto] md:items-end">
           <div>
             <p className="mb-4 font-mono text-xs tracking-[0.3em] text-muted-foreground">05 — WEBSITE DEMONSTRATIONS</p>
             <h2 className="text-4xl font-light tracking-tight md:text-6xl"><FoldText text="See the details." splitBy="word" fontSize="inherit" fontWeight={300} className="font-sans" /><br /><span className="italic"><FoldText text="Feel the difference." splitBy="word" fontSize="inherit" fontWeight={300} className="font-sans" /></span></h2>
-            <p className="mt-5 max-w-2xl font-mono text-xs leading-6 text-muted-foreground">Nine independent website demonstrations, all shown on this page. Previews are examples of digital experiences, not client endorsements.</p>
+            <p className="mt-5 max-w-2xl font-mono text-xs leading-6 text-muted-foreground">Choose a website to explore. One live preview at a time, in one large frame — all nine are right here on this page.</p>
           </div>
           <div className="flex flex-col gap-2 font-mono text-[10px] tracking-[0.2em] text-white/40 md:items-end">
             <span>09 WEBSITE DEMONSTRATIONS</span>
             <span>07 REFERENCES + 02 SHOPS</span>
           </div>
         </motion.div>
-        <div className="website-demo-grid grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3">
+
+        <div className="website-selector-list mb-5 flex gap-2 overflow-x-auto pb-2" role="tablist" aria-label="Choose a website demonstration">
           {websiteDemos.map((site, index) => (
-            <motion.article key={site.label} initial={{ opacity: 0, y: reduceMotion ? 0 : 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.08 }} transition={{ duration: 0.45, delay: reduceMotion ? 0 : (index % 3) * 0.05 }} className="website-demo-card min-w-0 overflow-hidden rounded-xl border border-white/12 bg-[#0b0c0b]">
-              <div className="flex h-10 items-center gap-1.5 border-b border-white/10 bg-white/[.035] px-3">
-                <span className="size-1.5 rounded-full bg-white/25" /><span className="size-1.5 rounded-full bg-white/25" /><span className="size-1.5 rounded-full bg-white/25" />
-                <div className="ml-2 min-w-0 flex-1 truncate rounded border border-white/10 px-2 py-1 font-mono text-[9px] text-white/45">{site.url.replace(/^https?:\/\//, "")}</div>
-              </div>
-              <div className="relative aspect-[4/3] overflow-hidden bg-[#111210]">
-                <iframe title={site.label + " website demonstration"} src={site.url} loading="lazy" className="website-demo-frame absolute inset-0 h-full w-full border-0 bg-white" referrerPolicy="strict-origin-when-cross-origin" />
-              </div>
-              <div className="px-4 py-4">
-                <p className="mb-1 font-mono text-[8px] tracking-[.18em] text-white/40">{String(index + 1).padStart(2, "0")} / {site.category}</p>
-                <h3 className="text-lg font-light tracking-tight">{site.label}</h3>
-                <p className="mt-2 text-sm leading-6 text-white/55">{site.description}</p>
-              </div>
-            </motion.article>
+            <button key={site.label} id={\`demo-tab-\${index}\`} type="button" role="tab" aria-selected={activeDemo === index} aria-controls="website-demo-panel" onClick={() => selectDemo(index)} className={\`website-selector-tab shrink-0 rounded-full border px-4 py-3 text-left transition-colors duration-200 \${activeDemo === index ? "is-active border-white/50 bg-white/[.09] text-white" : "border-white/10 bg-white/[.02] text-white/50 hover:text-white/80"}\`}>
+              <span className="mr-2 font-mono text-[9px] opacity-60">{String(index + 1).padStart(2, "0")}</span><span className="text-xs">{site.label}</span>
+            </button>
           ))}
         </div>
-        <p className="mt-5 font-mono text-[9px] leading-5 text-white/35">Some external websites block embedded previews. If a site restricts framing, its own security settings may prevent the live page from appearing inside the box.</p>
+
+        <div className="website-selector-frame overflow-hidden rounded-2xl border border-white/15 bg-[#090a09] shadow-2xl shadow-black/30" role="tabpanel" id="website-demo-panel" aria-labelledby={\`demo-tab-\${activeDemo}\`}>
+          <div className="flex min-h-12 items-center gap-2 border-b border-white/10 bg-white/[.035] px-3 md:px-5">
+            <span className="size-2 rounded-full bg-white/25" /><span className="size-2 rounded-full bg-white/25" /><span className="size-2 rounded-full bg-white/25" />
+            <span className="ml-2 min-w-0 flex-1 truncate rounded-lg border border-white/10 bg-black/20 px-3 py-2 font-mono text-[10px] text-white/55">{demo.url.replace(/^https?:\/\//, "")}</span>
+            <span className="hidden font-mono text-[9px] tracking-[.16em] text-white/40 sm:block">LIVE PREVIEW</span>
+          </div>
+          <div className="website-selector-viewport relative aspect-[4/3] min-h-[340px] overflow-hidden bg-[#0b0c0b] md:aspect-[16/9] md:min-h-[540px]">
+            <iframe key={demo.url} title={\`\${demo.label} website demonstration\`} src={demo.url} loading="eager" onLoad={() => setDemoStatus("ready")} onError={() => setDemoStatus("error")} referrerPolicy="strict-origin-when-cross-origin" className="website-selector-iframe absolute inset-0 h-full w-full border-0 bg-white" />
+            {demoStatus !== "ready" && (
+              <div className="absolute inset-0 z-10 flex items-center justify-center bg-[#0b0c0b]/95 p-6 text-center">
+                <div className="max-w-sm font-mono text-[10px] leading-6 tracking-widest text-white/50">
+                  {demoStatus === "error" ? <><span className="block text-white">THIS WEBSITE MAY RESTRICT EMBEDDING</span><p className="mt-2">You can still switch to another demonstration below.</p></> : <span className="inline-flex items-center gap-3"><span className="size-2 animate-pulse rounded-full bg-white/70" />LOADING {demo.label.toUpperCase()}</span>}
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+
+        <div className="mt-5 flex flex-col gap-5 border-b border-white/10 pb-7 sm:flex-row sm:items-start sm:justify-between">
+          <div className="max-w-2xl">
+            <p className="font-mono text-[9px] tracking-[.2em] text-white/40">{String(activeDemo + 1).padStart(2, "0")} / {demo.category}</p>
+            <h3 className="mt-2 text-2xl font-light tracking-tight md:text-3xl">{demo.label}</h3>
+            <p className="mt-3 text-sm leading-6 text-white/55">{demo.description}</p>
+          </div>
+          <div className="flex shrink-0 items-center gap-3">
+            <button type="button" onClick={previous} aria-label="Previous website demonstration" className="website-selector-arrow" disabled={activeDemo === 0}>← <span className="hidden sm:inline">PREVIOUS</span></button>
+            <button type="button" onClick={next} aria-label="Next website demonstration" className="website-selector-arrow"> <span className="hidden sm:inline">NEXT</span> →</button>
+          </div>
+        </div>
+        <p className="mt-4 font-mono text-[9px] leading-5 text-white/35">Some sites restrict embedded previews through their own security settings. Switching between the nine demonstrations remains available regardless.</p>
       </div>
     </section>
   )
