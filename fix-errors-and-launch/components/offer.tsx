@@ -55,7 +55,7 @@ export function VideoAndCareServices() {
       <div className="mx-auto max-w-6xl">
         <motion.div initial={{ opacity: 0, y: reduceMotion ? 0 : 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }} className="mb-12 grid gap-6 md:grid-cols-[1.1fr_.9fr] md:items-end">
           <div><p className="mb-4 font-mono text-xs tracking-[0.3em] text-muted-foreground">04 — VIDEO, CARE & CONTINUITY</p><h2 className="text-4xl font-light tracking-tight md:text-6xl"><FoldText text="Good work," splitBy="word" fontSize="inherit" fontWeight={300} /> <span className="italic"><FoldText text="kept in motion." splitBy="word" fontSize="inherit" fontWeight={300} /></span></h2></div>
-          <p className="max-w-lg font-mono text-xs leading-7 text-muted-foreground">From a single cinematic piece to ongoing support, we shape each engagement around what your business needs next. Every scope is discussed before work begins.</p>
+          <div className="max-w-lg font-mono text-xs leading-7 text-muted-foreground"><ScrollReveal baseOpacity={0.18} baseRotation={1.5} enableBlur blurStrength={3}>From a single cinematic piece to ongoing support, we shape each engagement around what your business needs next. Every scope is discussed before work begins.</ScrollReveal></div>
         </motion.div>
 
         <div className="grid gap-4 lg:grid-cols-3">
