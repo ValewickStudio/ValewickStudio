@@ -18,6 +18,7 @@ export function Hero() {
   return (
     <section ref={containerRef} className="hero-stage relative min-h-[760px] h-[100svh] w-full overflow-hidden md:min-h-[820px]">
       <div className="hero-sphere-layer pointer-events-none absolute inset-0 z-0" aria-hidden="true">
+        <span className="hero-light-ray" />
         <div className="hero-sphere-fallback" />
         <div className="absolute left-1/2 top-1/2 h-[min(88vh,940px)] w-[min(88vw,940px)] -translate-x-1/2 -translate-y-1/2 sm:h-[min(92vh,1040px)] sm:w-[min(92vw,1040px)]">
           <CrystalizedBall preset="eclipse" color="#FFFFFF" size={0.7} crackle={0.5} fill={0.5} interactive hoverStrength={0.7} strands={4} flares={0.4} glow={0.7} sparks={0.35} particleCount={14000} motion="drift" depth={0.7} haze={0.5} dustSpeed={0.8} speed={0.62} className="h-full w-full" />
