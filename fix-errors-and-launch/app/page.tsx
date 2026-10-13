@@ -23,9 +23,10 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <SmoothScroll>
-      <AmbientBackdrop />
+    <>
       <CustomCursor />
+      <SmoothScroll>
+      <AmbientBackdrop />
       <Navbar />
       <LaunchBanner />
       <main>
@@ -42,6 +43,7 @@ export default function Home() {
           <TechMarquee />
           <Footer />
       </main>
-    </SmoothScroll>
+      </SmoothScroll>
+    </>
   )
 }
