@@ -77,7 +77,7 @@ function Sphere() {
     void main() {
       vUv = uv;
       
-      float noise = snoise(position * 1.5 + uTime * 0.15);
+      float noise = snoise(position * 1.5 + uTime * 0.045);
       float displacement = noise * 0.15;
       vDisplacement = displacement;
       
@@ -108,7 +108,7 @@ function Sphere() {
     }
 
     if (meshRef.current) {
-      meshRef.current.rotation.y += delta * 0.05
+      meshRef.current.rotation.y += delta * 0.018
       meshRef.current.rotation.x = MathUtils.lerp(meshRef.current.rotation.x, pointer.y * 0.2, 0.05)
       meshRef.current.rotation.z = MathUtils.lerp(meshRef.current.rotation.z, pointer.x * 0.2, 0.05)
     }
