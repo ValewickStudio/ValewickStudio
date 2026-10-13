@@ -1,38 +1,49 @@
 "use client"
 
-import { useCallback, useState } from "react"
 import { motion } from "framer-motion"
 import { FoldText } from "@/components/react-bits/fold-text"
-import { CardSwap, type ShowcaseCardItem } from "@/components/react-bits/card-swap"
 import { ScrollReveal } from "@/components/react-bits/scroll-reveal"
 
-const sites: ShowcaseCardItem[] = [
-  { label: "Scandiwest", url: "https://scandiwest.framer.website", category: "01 / DESIGN REFERENCE", title: "Scandiwest", description: "A Scandinavian-inspired digital direction with considered typography and calm visual rhythm.", monogram: "SW" },
-  { label: "Royal Template", url: "https://royaltemplate.framer.website", category: "02 / DESIGN REFERENCE", title: "Royal Template", description: "A polished template reference for a refined, premium online presence.", monogram: "RT" },
-  { label: "Blunt Umbrellas", url: "https://bluntumbrellas.com", category: "03 / E-COMMERCE", title: "Blunt Umbrellas", description: "Product-led retail with bold brand storytelling and a clear path to purchase.", monogram: "BLUNT" },
-  { label: "Stella", url: "https://stella.framer.media", category: "04 / CREATIVE DIRECTION", title: "Stella", description: "An editorial visual reference with a distinctive, image-led point of view.", monogram: "STELLA" },
-  { label: "Edolus", url: "https://edolus.com", category: "05 / DIGITAL EXPERIENCE", title: "Edolus", description: "A modern digital experience to explore for its structure, presentation, and detail.", monogram: "EDOLUS" },
-  { label: "Agrumea Farm", url: "https://www.agrumeafarm.it", category: "06 / FOOD & ORIGIN", title: "Agrumea Farm", description: "A farm and produce reference rooted in place, origin, and product.", monogram: "AGRUMEA" },
-  { label: "Klausen", url: "https://klausen.com", category: "07 / BRAND EXPERIENCE", title: "Klausen", description: "A contemporary brand reference for visual consistency and digital presentation.", monogram: "KLAUSEN" },
+const sites = [
+  { title: "Scandiwest", url: "https://scandiwest.framer.website", category: "DESIGN REFERENCE" },
+  { title: "Royal Template", url: "https://royaltemplate.framer.website", category: "DESIGN REFERENCE" },
+  { title: "Blunt Umbrellas", url: "https://bluntumbrellas.com", category: "E-COMMERCE" },
+  { title: "Stella", url: "https://stella.framer.media", category: "CREATIVE DIRECTION" },
+  { title: "Edolus", url: "https://edolus.com", category: "DIGITAL EXPERIENCE" },
+  { title: "Agrumea Farm", url: "https://www.agrumeafarm.it", category: "FOOD & ORIGIN" },
+  { title: "Klausen", url: "https://klausen.com", category: "BRAND EXPERIENCE" },
 ]
 
 export function WebsiteShowcase() {
-  const [activeIndex, setActiveIndex] = useState(0)
-  const changeActive = useCallback((index: number) => setActiveIndex(index), [])
-
   return (
     <section id="website-showcase" className="border-t border-white/10 px-5 py-20 md:px-12 md:py-28">
-      <div className="mx-auto max-w-6xl">
+      <div className="mx-auto max-w-7xl">
         <motion.div initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: .6 }} className="mb-10 grid gap-5 md:mb-14 md:grid-cols-[1fr_auto] md:items-end">
           <div>
             <p className="mb-4 font-mono text-[10px] tracking-[.28em] text-white/45">SELECTED DIGITAL REFERENCES</p>
             <h2 className="max-w-3xl text-4xl font-light leading-[1.05] tracking-tight md:text-6xl"><FoldText text="See the details." splitBy="word" fontSize="inherit" fontWeight={300} /><br /><span className="text-white/55"><FoldText text="Feel the difference." splitBy="word" fontSize="inherit" fontWeight={300} /></span></h2>
-            <div className="mt-5 max-w-xl font-mono text-xs text-white/50"><ScrollReveal baseOpacity={0.16} baseRotation={2} enableBlur blurStrength={3}>A collection of digital experiences worth exploring. Select a card to bring it forward, then open the original website to explore it in full.</ScrollReveal></div>
+            <div className="mt-5 max-w-xl font-mono text-xs text-white/50"><ScrollReveal baseOpacity={0.16} baseRotation={2} enableBlur blurStrength={3}>Explore these websites right here. Each preview sits inside its own browser-style box, without sending you to a new tab.</ScrollReveal></div>
           </div>
-          <span className="font-mono text-[10px] tracking-[.2em] text-white/35">07 REFERENCES / EXTERNAL SITES</span>
+          <span className="font-mono text-[10px] tracking-[.2em] text-white/35">07 REFERENCES / ON-PAGE PREVIEWS</span>
         </motion.div>
-        <CardSwap items={sites} activeIndex={activeIndex} onChange={changeActive} />
-        <p className="mt-5 font-mono text-[9px] leading-5 text-white/35">These are independent third-party websites. Each card links directly to its original site; external pages may restrict embedded previews.</p>
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3">
+          {sites.map((site, index) => (
+            <motion.article key={site.title} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.12 }} transition={{ duration: .5, delay: (index % 3) * .07 }} className="group min-w-0 overflow-hidden rounded-xl border border-white/12 bg-[#0b0c0b] shadow-[0_18px_55px_rgba(0,0,0,.25)]">
+              <div className="flex h-10 items-center gap-1.5 border-b border-white/10 bg-white/[.035] px-3">
+                <span className="size-1.5 rounded-full bg-white/25" /><span className="size-1.5 rounded-full bg-white/25" /><span className="size-1.5 rounded-full bg-white/25" />
+                <div className="ml-2 min-w-0 flex-1 truncate rounded border border-white/10 px-2 py-1 font-mono text-[9px] text-white/45">{site.url.replace(/^https?:\/\//, "")}</div>
+              </div>
+              <div className="relative aspect-[4/3] overflow-hidden bg-[#111210]">
+                <iframe title={site.title + " website preview"} src={site.url} loading="lazy" className="absolute inset-0 h-full w-full border-0 bg-white" sandbox="allow-scripts allow-same-origin allow-forms" referrerPolicy="strict-origin-when-cross-origin" />
+              </div>
+              <div className="flex items-center justify-between gap-3 px-4 py-4">
+                <div className="min-w-0"><p className="mb-1 font-mono text-[8px] tracking-[.18em] text-white/40">{String(index+1).padStart(2,"0")} / {site.category}</p><h3 className="truncate text-lg font-light tracking-tight">{site.title}</h3></div>
+                <span className="shrink-0 font-mono text-[8px] tracking-[.12em] text-white/40">LIVE PREVIEW</span>
+              </div>
+            </motion.article>
+          ))}
+        </div>
+        <p className="mt-5 font-mono text-[9px] leading-5 text-white/35">Some external websites restrict embedded previews. If a site blocks framing, its box may show the site’s own browser restriction; the other previews remain on this page.</p>
       </div>
     </section>
   )
