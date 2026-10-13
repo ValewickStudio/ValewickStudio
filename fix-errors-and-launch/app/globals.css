@@ -1463,6 +1463,9 @@ main, header, footer, nav, .website-selector-section { position: relative; z-ind
 }
 .star-border::before {
   background: conic-gradient(from 0deg, transparent 0deg, var(--star-color) 18deg, transparent 38deg, transparent 180deg, var(--star-trail) 195deg, transparent 218deg, transparent 360deg);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
   animation: star-border-orbit var(--star-duration) linear infinite;
   opacity: .75;
   z-index: -1;
@@ -1471,7 +1474,7 @@ main, header, footer, nav, .website-selector-section { position: relative; z-ind
   inset: var(--star-thickness);
   background: var(--star-surface, #090909);
   border-radius: calc(var(--star-radius) - var(--star-thickness));
-  z-index: -1;
+  z-index: 2;
 }
 .star-border:hover::before { opacity: calc(.6 + var(--star-glow) * .4); filter: drop-shadow(0 0 8px var(--star-color)); }
 .star-border-reverse::before { animation-direction: reverse; }
