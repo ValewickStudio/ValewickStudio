@@ -1281,3 +1281,51 @@ body, html { background: #080909; }
   .soundscape-icon { flex-basis: 30px; width: 30px; height: 30px; }
   .soundscape-label { font-size: 10px; }
 }
+
+/* Website demonstrations stay visually still on hover; previews are view-only. */
+.website-demo-card,
+.website-demo-card:hover {
+  transform: none !important;
+  translate: none !important;
+  rotate: none !important;
+  scale: 1 !important;
+  box-shadow: none !important;
+  border-color: rgb(255 255 255 / 12%) !important;
+  filter: none !important;
+}
+.website-demo-card::before,
+.website-demo-card::after { content: none !important; display: none !important; }
+.website-demo-card :is(h3, p, .website-demo-frame) { translate: none !important; transform: none !important; filter: none !important; }
+.website-demo-frame { pointer-events: none; }
+.website-demo-card iframe { transition: none !important; }
+
+/* A restrained, slow ray of light passing through the hero atmosphere. */
+.hero-light-ray {
+  position: absolute;
+  z-index: 2;
+  top: -35%;
+  left: 52%;
+  width: clamp(100px, 15vw, 240px);
+  height: 175%;
+  opacity: .34;
+  transform: rotate(28deg) translateX(-50%);
+  transform-origin: center;
+  background: linear-gradient(90deg, transparent 0%, rgb(255 255 255 / 2%) 25%, rgb(255 249 229 / 13%) 49%, rgb(255 255 255 / 4%) 63%, transparent 100%);
+  filter: blur(18px);
+  mix-blend-mode: screen;
+  animation: hero-light-pass 16s ease-in-out infinite alternate;
+}
+.hero-light-ray::after {
+  content: "";
+  position: absolute;
+  inset: 0 45%;
+  background: linear-gradient(180deg, transparent, rgb(255 250 235 / 20%), transparent);
+  filter: blur(8px);
+}
+@keyframes hero-light-pass {
+  0% { opacity: .14; translate: -9vw 0; }
+  100% { opacity: .42; translate: 8vw 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-light-ray { animation: none; opacity: .22; }
+}
