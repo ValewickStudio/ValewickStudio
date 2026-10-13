@@ -31,7 +31,6 @@ export const DotField = memo(function DotField({ dotRadius=1.15,dotSpacing=17,bu
         ctx.globalAlpha=alpha;ctx.beginPath();ctx.arc(x,y,dotRadius,0,Math.PI*2);ctx.fill()
       }
       ctx.globalAlpha=1
-      if(!reduce.matches&&mouse.active)raf=requestAnimationFrame(draw)
     }
     const observer=new ResizeObserver(resize);observer.observe(canvas);window.addEventListener("pointermove",move,{passive:true});window.addEventListener("blur",leave);resize()
     return()=>{observer.disconnect();window.removeEventListener("pointermove",move);window.removeEventListener("blur",leave);if(raf)cancelAnimationFrame(raf)}
