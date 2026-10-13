@@ -2,7 +2,8 @@
 
 import { motion, useReducedMotion } from "framer-motion"
 import { CircularText } from "@/components/react-bits/circular-text"
-import { BlurText } from "@/components/react-bits/blur-text"
+import { FoldText } from "@/components/react-bits/fold-text"
+import { ScrollReveal } from "@/components/react-bits/scroll-reveal"
 import { GlareHover } from "@/components/react-bits/glare-hover"
 import { SpotlightCard } from "@/components/react-bits/spotlight-card"
 
@@ -19,7 +20,7 @@ export function About() {
       {/* Section Header */}
       <div className="mx-auto max-w-6xl">
         <motion.div initial={{ opacity: 0, y: reduceMotion ? 0 : 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }} className="mb-12 grid gap-6 md:grid-cols-2 md:items-end">
-          <div><p className="mb-4 font-mono text-xs tracking-[0.3em] text-muted-foreground">02 — THE HOUSE APPROACH</p><h2 className="text-4xl font-light tracking-tight md:text-6xl"><BlurText text="Not just seen." delay={65} /><br /><span className="italic"><BlurText text="Remembered." delay={90} direction="top" /></span></h2></div>
+          <div><p className="mb-4 font-mono text-xs tracking-[0.3em] text-muted-foreground">02 — THE HOUSE APPROACH</p><h2 className="text-4xl font-light tracking-tight md:text-6xl"><FoldText text="Not just seen." splitBy="word" fontSize="inherit" fontWeight={300} /><br /><span className="italic"><FoldText text="Remembered." splitBy="word" fontSize="inherit" fontWeight={300} /></span></h2></div>
           <SpotlightCard className="max-w-md rounded-2xl"><motion.div initial={{ opacity: 1, y: 0 }} className="liquid-glass rounded-2xl p-6"><p className="font-mono text-xs leading-7 text-muted-foreground">We bring your website, campaign creative, and everyday workflows together. One considered direction, from the first impression to the next opportunity.</p><p className="mt-5 border-l border-accent/70 pl-4 font-mono text-[10px] leading-5 tracking-[0.12em] text-white/70"><span className="block">BEGIN WITH CONFIDENCE.</span><span className="block">IF IT&apos;S NOT THE RIGHT FIT, THERE&apos;S NO OBLIGATION TO CONTINUE.</span></p></motion.div></SpotlightCard>
         </motion.div>
         {/* Brand statements */}
@@ -27,7 +28,7 @@ export function About() {
           {statements.map(([label, statement], index) => (
             <motion.div key={label} initial={{ opacity: 0, y: reduceMotion ? 0 : 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.4 }} transition={{ duration: 0.65, delay: index * 0.06 }} className="liquid-glass spotlight-card glare-hover group grid gap-4 border-t border-white/10 px-5 py-8 md:grid-cols-[180px_1fr] md:px-7 md:py-10">
               <span className="font-mono text-xs tracking-widest text-muted-foreground">{label.toUpperCase()}</span>
-              <p className="max-w-3xl text-2xl font-light leading-snug tracking-tight transition-transform duration-500 group-hover:translate-x-2 md:text-4xl">{statement}</p>
+              <div className="max-w-3xl text-2xl font-light leading-snug tracking-tight transition-transform duration-500 group-hover:translate-x-2 md:text-4xl"><ScrollReveal baseOpacity={0.18} baseRotation={1.5} enableBlur blurStrength={3}>{statement}</ScrollReveal></div>
             </motion.div>
           ))}
         </div>
