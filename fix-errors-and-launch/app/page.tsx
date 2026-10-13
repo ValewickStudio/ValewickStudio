@@ -14,6 +14,8 @@ import { ReviewCapsule } from "@/components/reviews"
 import { AmbientBackdrop } from "@/components/ambient-backdrop"
 import { WebsiteShowcase } from "@/components/website-showcase"
 import { LaunchBanner } from "@/components/launch-banner"
+import LightRays from "@/components/react-bits/LightRays"
+import { SoundNotice } from "@/components/sound-notice"
 
 export const metadata: Metadata = {
   title: "Websites, Creative & Digital Systems",
@@ -25,8 +27,10 @@ export default function Home() {
   return (
     <>
       <CustomCursor />
+      <SoundNotice />
       <SmoothScroll>
       <AmbientBackdrop />
+      <LightRays raysOrigin="top-center" raysColor="#e9d8b1" raysSpeed={0.22} lightSpread={0.82} rayLength={1.6} followMouse mouseInfluence={0.07} noiseAmount={0.025} distortion={0.018} pulsating className="site-wide-rays" />
       <Navbar />
       <LaunchBanner />
       <main>
