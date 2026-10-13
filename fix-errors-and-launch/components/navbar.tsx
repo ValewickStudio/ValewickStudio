@@ -31,9 +31,9 @@ export function Navbar() {
 
         if (isMenuOpen || currentY < 40) {
           setIsVisible(true)
-        } else if (delta > 5 && currentY > 120) {
+        } else if (delta > 2 && currentY > 120) {
           setIsVisible(false)
-        } else if (delta < -5) {
+        } else if (delta < -1) {
           setIsVisible(true)
         }
 
