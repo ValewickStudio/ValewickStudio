@@ -2,7 +2,7 @@
 
 import { useRef } from "react"
 import { motion, useScroll, useTransform } from "framer-motion"
-import { SentientSphere } from "./sentient-sphere"
+import CrystalizedBall from "@/components/react-bits/crystalized-ball"
 import { prefillEnquiry } from "@/lib/enquiry-events"
 import { TrustpilotNote } from "@/components/reviews"
 import { TextType } from "@/components/react-bits/text-type"
@@ -25,7 +25,9 @@ export function Hero() {
       {/* 3D Sphere Background */}
       <div className="hero-sphere-layer pointer-events-none absolute inset-0 z-0" aria-hidden="true">
         <div className="hero-sphere-fallback" />
-        <SentientSphere />
+        <div className="absolute right-[-8%] top-[47%] h-[min(76vh,760px)] w-[min(70vw,760px)] -translate-y-1/2 md:right-[0%] md:w-[min(62vw,760px)]">
+          <CrystalizedBall preset="eclipse" color="#FFFFFF" size={0.7} crackle={0.5} fill={0.5} interactive hoverStrength={0.7} strands={4} flares={0.4} glow={0.7} sparks={0.35} particleCount={14000} motion="drift" depth={0.7} haze={0.5} dustSpeed={0.8} speed={0.62} className="h-full w-full" />
+        </div>
       </div>
 
       {/* Typography Overlay */}
