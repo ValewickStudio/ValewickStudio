@@ -1247,3 +1247,37 @@ body, html { background: #080909; }
 @keyframes hero-sphere-drift{from{transform:translate(-50%,-50%) rotate(-7deg) scale(.97)}to{transform:translate(-50%,-50%) rotate(7deg) scale(1.03)}}
 @media(max-width:767px){.hero-sphere-fallback{left:68%;top:44%;width:min(76vw,390px);opacity:.65}.hero-sphere-layer canvas{opacity:.62}}
 @media(prefers-reduced-motion:reduce){.hero-sphere-fallback{animation:none}}
+
+
+/* Stable sound control: no hover lift, no inherited glass pseudo-element, no jitter. */
+.soundscape-control {
+  isolation: isolate;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 52px;
+  max-width: calc(100vw - 24px);
+  padding: 9px 14px 9px 10px;
+  border: 1px solid rgba(244,241,233,.17);
+  border-radius: 999px;
+  color: #f4f0e8;
+  cursor: pointer;
+  transform: none !important;
+  transition: border-color .22s ease, background-color .22s ease, box-shadow .22s ease;
+}
+.soundscape-control::before,
+.soundscape-control::after { content: none !important; display: none !important; }
+.soundscape-control:hover { transform: none !important; }
+.soundscape-control:disabled { opacity: .72; cursor: progress; }
+.soundscape-icon { display: grid; place-items: center; flex: 0 0 34px; width: 34px; height: 34px; border: 1px solid rgba(255,255,255,.12); border-radius: 50%; color: rgba(255,255,255,.72); background: rgba(255,255,255,.045); }
+.soundscape-icon-active { color: #e2cda1; }
+.soundscape-copy { min-width: 0; display: flex; flex-direction: column; gap: 4px; }
+.soundscape-eyebrow { font: 9px/1 var(--font-geist-mono); letter-spacing: .15em; color: rgba(215,195,154,.82); }
+.soundscape-label { font: 11px/1.2 var(--font-geist-mono); white-space: nowrap; color: rgba(255,255,255,.9); }
+.soundscape-wave { display: flex; align-items: center; flex: 0 0 auto; margin-left: 2px; color: rgba(255,255,255,.42); }
+.soundscape-wave-on { color: #e2cda1; }
+@media (max-width: 640px) {
+  .soundscape-control { right: 12px !important; bottom: 12px !important; gap: 8px; min-height: 48px; padding: 7px 10px 7px 8px; }
+  .soundscape-icon { flex-basis: 30px; width: 30px; height: 30px; }
+  .soundscape-label { font-size: 10px; }
+}
