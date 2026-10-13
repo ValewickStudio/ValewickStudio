@@ -12,7 +12,6 @@ import { WebsitePackages } from "@/components/website-packages"
 import { ProjectEnquiry } from "@/components/project-enquiry"
 import { ReviewCapsule } from "@/components/reviews"
 import { AmbientBackdrop } from "@/components/ambient-backdrop"
-import { WebsiteShowcase } from "@/components/website-showcase"
 import { LaunchBanner } from "@/components/launch-banner"
 import LightRays from "@/components/react-bits/LightRays"
 import { SoundNotice } from "@/components/sound-notice"
@@ -39,7 +38,6 @@ export default function Home() {
           <Services />
           <VideoAndCareServices />
           <Works />
-          <WebsiteShowcase />
           <Demo />
           <WebsitePackages />
           <ReviewCapsule />
