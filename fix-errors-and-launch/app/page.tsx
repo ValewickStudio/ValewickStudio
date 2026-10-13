@@ -11,6 +11,8 @@ import { WebsitePackages } from "@/components/website-packages"
 import { ProjectEnquiry } from "@/components/project-enquiry"
 import { ReviewCapsule } from "@/components/reviews"
 import { AmbientBackdrop } from "@/components/ambient-backdrop"
+import { WebsiteShowcase } from "@/components/website-showcase"
+import { LaunchBanner } from "@/components/launch-banner"
 
 export const metadata: Metadata = {
   title: "Websites, Creative & Digital Systems",
@@ -23,12 +25,14 @@ export default function Home() {
     <SmoothScroll>
       <AmbientBackdrop />
       <Navbar />
+      <LaunchBanner />
       <main>
           <Hero />
           <About />
           <Services />
           <VideoAndCareServices />
           <Works />
+          <WebsiteShowcase />
           <Demo />
           <WebsitePackages />
           <ReviewCapsule />
