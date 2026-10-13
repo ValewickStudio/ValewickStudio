@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useRef } from 'react';
 import { Renderer, Program, Mesh, Triangle, Geometry, RenderTarget, Texture } from 'ogl';
 
-import './CrystalizedBall.css';
+import './crystalized-ball.css';
 
 const BALL_PRESETS = {
   plasma: {
