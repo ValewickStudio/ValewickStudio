@@ -22,9 +22,9 @@ export const metadata: Metadata = {
   applicationName: "Valewick House",
   alternates: { canonical: "/" },
   icons: {
-    icon: [{ url: "/icon-dark-32x32.png", sizes: "32x32", type: "image/png" }],
-    shortcut: "/icon-dark-32x32.png",
-    apple: "/apple-icon.png",
+    icon: [{ url: "/brand/valewick-monogram.png", sizes: "512x512", type: "image/png" }],
+    shortcut: "/brand/valewick-monogram.png",
+    apple: "/brand/valewick-monogram.png",
   },
   openGraph: {
     type: "website",
