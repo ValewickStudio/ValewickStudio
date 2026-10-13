@@ -5,7 +5,6 @@ import { motion, useReducedMotion } from "framer-motion"
 import { prefillEnquiry } from "@/lib/enquiry-events"
 import { ScrollReveal } from "@/components/react-bits/scroll-reveal"
 import { FoldText } from "@/components/react-bits/fold-text"
-import { CardSwap } from "@/components/react-bits/card-swap"
 
 const services = [
   ["01", "Websites with purpose.", "Custom websites and landing pages shaped around your brand, your audience, and the next step you want them to take."],
@@ -91,47 +90,52 @@ export function VideoAndCareServices() {
 }
 
 const websiteDemos = [
-  { label: "KYŌ KOHEE", url: "https://kyo-slow-sip.base44.app", description: "A quiet, cinematic hospitality experience demonstration." },
-  { label: "SELINE", url: "https://seline-smart-sync.base44.app", description: "A focused product and systems experience demonstration." },
+  { label: "Scandiwest", url: "https://scandiwest.framer.website", category: "DESIGN REFERENCE", description: "Scandinavian-inspired design with calm spacing, clean typography, and a considered visual hierarchy." },
+  { label: "Royal Template", url: "https://royaltemplate.framer.website", category: "DESIGN REFERENCE", description: "An editorial, premium template reference for confident brand storytelling and polished section layouts." },
+  { label: "Blunt Umbrellas", url: "https://bluntumbrellas.com", category: "E-COMMERCE", description: "A product-led storefront with bold product presentation and a direct shopping journey." },
+  { label: "Stella", url: "https://stella.framer.media", category: "CREATIVE DIRECTION", description: "A creative portfolio reference for expressive art direction, motion, and a distinctive visual identity." },
+  { label: "Edolus", url: "https://edolus.com", category: "DIGITAL EXPERIENCE", description: "A modern digital experience shaped around atmosphere, layout, and a clear brand presence." },
+  { label: "Agrumea Farm", url: "https://www.agrumeafarm.it", category: "FOOD & ORIGIN", description: "A food and origin story that connects the product with its place and provenance." },
+  { label: "Klausen", url: "https://klausen.com", category: "BRAND EXPERIENCE", description: "A cohesive brand experience with confident presentation and an uncluttered customer journey." },
+  { label: "KYO KOHEE", url: "https://kyo-slow-sip.base44.app", category: "COFFEE & MATCHA SHOP", description: "A quiet, cinematic shop experience for a coffee and matcha brand, with a calm visual rhythm." },
+  { label: "SELINE", url: "https://seline-smart-sync.base44.app", category: "SHOP / DIGITAL SYSTEMS", description: "A considered product storefront and digital systems experience, designed around clarity and premium presentation." },
 ]
 
 export function Demo() {
   const reduceMotion = useReducedMotion()
-  const [activeDemo, setActiveDemo] = useState(0)
-  const [demoStatus, setDemoStatus] = useState<"loading" | "ready" | "error">("loading")
-  const demo = websiteDemos[activeDemo]
-
-  useEffect(() => {
-    setDemoStatus("loading")
-    const timeout = window.setTimeout(() => setDemoStatus((status) => status === "loading" ? "error" : status), 9000)
-    return () => window.clearTimeout(timeout)
-  }, [demo.url])
-
   return (
-    <section id="work" className="border-t border-white/10 px-6 py-24 md:px-12 md:py-28">
-      <div className="mx-auto max-w-6xl">
-        <motion.div initial={{ opacity: 0, y: reduceMotion ? 0 : 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.75 }}>
-          <p className="mb-4 font-mono text-xs tracking-[0.3em] text-muted-foreground">05 — WEBSITE DEMONSTRATIONS</p>
-          <h2 className="text-4xl font-light tracking-tight md:text-6xl"><FoldText text="See the details." splitBy="word" fontSize="inherit" fontWeight={300} className="font-sans" /><br /><span className="italic"><FoldText text="Feel the difference." splitBy="word" fontSize="inherit" fontWeight={300} className="font-sans" /></span></h2>
-          <p className="mt-5 max-w-2xl font-mono text-xs leading-6 text-muted-foreground">Explore two independent, moving site demonstrations. These are examples of digital experiences, not client endorsements.</p>
+    <section id="work" className="website-demo-section border-t border-white/10 px-5 py-20 md:px-12 md:py-28">
+      <div className="mx-auto max-w-7xl">
+        <motion.div initial={{ opacity: 0, y: reduceMotion ? 0 : 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.75 }} className="mb-10 grid gap-5 md:mb-14 md:grid-cols-[1fr_auto] md:items-end">
+          <div>
+            <p className="mb-4 font-mono text-xs tracking-[0.3em] text-muted-foreground">05 — WEBSITE DEMONSTRATIONS</p>
+            <h2 className="text-4xl font-light tracking-tight md:text-6xl"><FoldText text="See the details." splitBy="word" fontSize="inherit" fontWeight={300} className="font-sans" /><br /><span className="italic"><FoldText text="Feel the difference." splitBy="word" fontSize="inherit" fontWeight={300} className="font-sans" /></span></h2>
+            <p className="mt-5 max-w-2xl font-mono text-xs leading-6 text-muted-foreground">Nine independent website demonstrations, all shown on this page. Previews are examples of digital experiences, not client endorsements.</p>
+          </div>
+          <div className="flex flex-col gap-2 font-mono text-[10px] tracking-[0.2em] text-white/40 md:items-end">
+            <span>09 WEBSITE DEMONSTRATIONS</span>
+            <span>07 REFERENCES + 02 SHOPS</span>
+          </div>
         </motion.div>
-        <CardSwap
-          items={websiteDemos.map((item, index) => ({
-            label: item.label,
-            title: item.label,
-            description: item.description,
-            url: item.url,
-            category: index === 0 ? "HOSPITALITY / STOREFRONT" : "PRODUCT / DIGITAL SYSTEMS",
-            monogram: index === 0 ? "K" : "S",
-          }))}
-          activeIndex={activeDemo}
-          onChange={(index) => { setActiveDemo(index); setDemoStatus("loading") }}
-        />
-        <motion.div key={demo.url} initial={{ opacity: 0, y: reduceMotion ? 0 : 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.55 }} role="tabpanel" id="website-demo-panel" aria-labelledby={`demo-tab-${activeDemo}`} className="liquid-glass spotlight-card glare-hover mt-5 overflow-hidden rounded-2xl p-2 shadow-2xl shadow-black/30 md:p-4">
-          <div className="flex items-center gap-2 border-b border-white/10 px-3 pb-3 pt-2"><span className="size-2 rounded-full bg-white/25" /><span className="size-2 rounded-full bg-white/25" /><span className="size-2 rounded-full bg-white/25" /><span className="ml-3 flex-1 truncate rounded-full border border-white/10 bg-black/20 px-4 py-2 font-mono text-[9px] text-muted-foreground">{demo.url.replace("https://", "")}</span><motion.span aria-hidden="true" animate={reduceMotion ? undefined : { opacity: [0.45, 1, 0.45] }} transition={{ duration: 2.4, repeat: Number.POSITIVE_INFINITY }} className="font-mono text-[9px] tracking-wider text-white/50">LIVE DEMO</motion.span></div>
-          <div className="relative overflow-hidden rounded-b-xl border border-white/10 bg-black/40 p-1 md:p-2"><div className={`absolute inset-0 z-10 flex items-center justify-center bg-[#101313]/90 transition-opacity duration-500 ${demoStatus === "ready" ? "pointer-events-none opacity-0" : "pointer-events-auto opacity-100"}`}><div className="liquid-glass rounded-2xl px-6 py-5 text-center font-mono text-[10px] tracking-widest text-muted-foreground">{demoStatus === "error" ? <><span className="block text-foreground">PREVIEW BLOCKED BY SITE</span><a href={demo.url} target="_blank" rel="noreferrer" className="mt-3 inline-flex items-center gap-2 rounded-full border border-white/20 px-4 py-2 text-foreground transition-all hover:border-white hover:bg-white hover:text-black">OPEN {demo.label.toUpperCase()} <span aria-hidden="true">↗</span></a></> : <span className="inline-flex items-center gap-2"><span className="size-2 animate-pulse rounded-full bg-foreground" />LOADING LIVE DEMO</span>}</div></div><iframe title={`${demo.label} independent website demonstration`} src={demo.url} loading={activeDemo === 0 ? "eager" : "lazy"} onLoad={() => setDemoStatus("ready")} onError={() => setDemoStatus("error")} className="block h-[420px] min-h-[420px] w-[calc(100%+18px)] max-w-none rounded-lg bg-[#101313] md:h-[min(68vw,680px)] md:min-h-[560px]" /></div>
-        </motion.div>
-        <div className="mt-5 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between"><p className="font-mono text-[10px] leading-5 tracking-[0.12em] text-muted-foreground">INDEPENDENT EXAMPLE <span className="mx-2 text-white/30">/</span> RESPONSIVE EXPERIENCE</p><a href={demo.url} target="_blank" rel="noreferrer" className="group inline-flex items-center gap-2 font-mono text-xs tracking-widest text-muted-foreground transition-colors hover:text-foreground">OPEN {demo.label.toUpperCase()} <span className="transition-transform group-hover:-translate-y-1 group-hover:translate-x-1">↗</span></a></div>
+        <div className="website-demo-grid grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3">
+          {websiteDemos.map((site, index) => (
+            <motion.article key={site.label} initial={{ opacity: 0, y: reduceMotion ? 0 : 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.08 }} transition={{ duration: 0.45, delay: reduceMotion ? 0 : (index % 3) * 0.05 }} className="website-demo-card min-w-0 overflow-hidden rounded-xl border border-white/12 bg-[#0b0c0b]">
+              <div className="flex h-10 items-center gap-1.5 border-b border-white/10 bg-white/[.035] px-3">
+                <span className="size-1.5 rounded-full bg-white/25" /><span className="size-1.5 rounded-full bg-white/25" /><span className="size-1.5 rounded-full bg-white/25" />
+                <div className="ml-2 min-w-0 flex-1 truncate rounded border border-white/10 px-2 py-1 font-mono text-[9px] text-white/45">{site.url.replace(/^https?:\/\//, "")}</div>
+              </div>
+              <div className="relative aspect-[4/3] overflow-hidden bg-[#111210]">
+                <iframe title={site.label + " website demonstration"} src={site.url} loading="lazy" className="website-demo-frame absolute inset-0 h-full w-full border-0 bg-white" referrerPolicy="strict-origin-when-cross-origin" />
+              </div>
+              <div className="px-4 py-4">
+                <p className="mb-1 font-mono text-[8px] tracking-[.18em] text-white/40">{String(index + 1).padStart(2, "0")} / {site.category}</p>
+                <h3 className="text-lg font-light tracking-tight">{site.label}</h3>
+                <p className="mt-2 text-sm leading-6 text-white/55">{site.description}</p>
+              </div>
+            </motion.article>
+          ))}
+        </div>
+        <p className="mt-5 font-mono text-[9px] leading-5 text-white/35">Some external websites block embedded previews. If a site restricts framing, its own security settings may prevent the live page from appearing inside the box.</p>
       </div>
     </section>
   )
