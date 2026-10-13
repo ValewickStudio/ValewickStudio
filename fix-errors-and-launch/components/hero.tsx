@@ -23,7 +23,8 @@ export function Hero() {
   return (
     <section ref={containerRef} className="hero-stage relative min-h-[760px] h-[100svh] w-full overflow-hidden md:min-h-[820px]">
       {/* 3D Sphere Background */}
-      <div className="absolute inset-0">
+      <div className="hero-sphere-layer pointer-events-none absolute inset-0 z-0" aria-hidden="true">
+        <div className="hero-sphere-fallback" />
         <SentientSphere />
       </div>
 
@@ -40,7 +41,7 @@ export function Hero() {
             <br />
             <ShinyText trigger="loop" speed={5.5} color="#f4f0e8" shineColor="#ffffff">Real ambition.</ShinyText>
           </h2>
-          <p className="mt-5 min-h-12 max-w-sm font-mono text-xs leading-6 text-muted-foreground"><ShinyText trigger="loop" speed={4.5} color="currentColor" shineColor="#ffffff"><TextType text={["Websites with purpose.", "Creative that connects.", "Systems that work smarter."]} typingSpeed={48} deletingSpeed={24} pauseDuration={1500} initialDelay={650} /></ShinyText></p><p className="mt-4 max-w-sm font-mono text-[10px] leading-5 tracking-[0.12em] text-white/55">CLEAR SCOPE · RESPONSIVE BUILD · HUMAN SUPPORT</p>
+          <p className="mt-5 min-h-6 w-fit max-w-full font-mono text-xs leading-6 text-muted-foreground"><ShinyText trigger="loop" speed={4.5} color="currentColor" shineColor="#ffffff"><TextType text={["Websites with purpose.", "Creative that connects.", "Systems that work smarter."]} typingSpeed={48} deletingSpeed={24} pauseDuration={1500} initialDelay={650} /></ShinyText></p><p className="mt-4 max-w-sm font-mono text-[10px] leading-5 tracking-[0.12em] text-white/55">CLEAR SCOPE · RESPONSIVE BUILD · HUMAN SUPPORT</p>
           <a href="#concept" className="liquid-glass mt-6 inline-flex min-h-11 items-center rounded-full border border-white/20 px-5 py-3 font-mono text-[10px] tracking-[0.12em] text-white/85 transition-colors hover:border-white hover:bg-white hover:text-black">EXPLORE THE $50 HOMEPAGE CONCEPT →</a>
           <motion.div
             initial={{ opacity: 0, y: 16 }}
