@@ -170,7 +170,7 @@ export async function POST(request: Request) {
 
   let endpoint: URL
   try {
-    endpoint = new URL(`https://api.telegram.org/bot${encodeURIComponent(token)}/sendMessage`)
+    endpoint = new URL(`https://api.telegram.org/bot${token.trim()}/sendMessage`)
   } catch {
     return diagnostic({ stage: "url", error: "Telegram endpoint could not be constructed." })
   }
@@ -246,45 +246,72 @@ export async function POST(request: Request) {
     "━━━━━━━━━━━━━━━━━━━━",
   ].join("\n")
 
-  let telegram: Response
-  try {
-    telegram = await fetch(endpoint, {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify({ chat_id: chatId, text: message }),
-    })
-  } catch {
-    return diagnostic({ stage: "telegram_fetch", error: "Telegram request failed before receiving a response." })
+  // Telegram limits each text message to 4096 characters. Split longer
+  // applications into readable chunks so detailed enquiries are never rejected.
+  const chunks: string[] = []
+  let remaining = message
+  while (remaining.length > 3900) {
+    let splitAt = remaining.lastIndexOf("\\n\\n", 3900)
+    if (splitAt < 1800) splitAt = remaining.lastIndexOf("\\n", 3900)
+    if (splitAt < 1) splitAt = 3900
+    chunks.push(remaining.slice(0, splitAt))
+    remaining = remaining.slice(splitAt).trimStart()
+  }
+  if (remaining) chunks.push(remaining)
+
+  let telegramStatus = 200
+  let telegramErrorCode = 0
+  let telegramDescription = ""
+  for (const [index, chunk] of chunks.entries()) {
+    let telegram: Response
+    try {
+      telegram = await fetch(endpoint, {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ chat_id: chatId.trim(), text: chunks.length > 1 ? `Application (part ${index + 1}/${chunks.length})\\n\\n${chunk}` : chunk }),
+        signal: AbortSignal.timeout(12_000),
+      })
+    } catch {
+      return diagnostic({ stage: "telegram_fetch", error: "Telegram request failed before receiving a response." }, 502)
+    }
+
+    let telegramBody: { ok?: boolean; error_code?: number; description?: string } | null = null
+    try {
+      telegramBody = await telegram.json()
+    } catch {
+      return diagnostic({
+        stage: "telegram_response",
+        error: "Telegram returned a response that was not valid JSON.",
+        telegramStatus: telegram.status,
+        telegramErrorCode: 0,
+        telegramDescription: "Invalid JSON response.",
+      }, 502)
+    }
+
+    telegramStatus = telegram.status
+    telegramErrorCode = telegramBody?.error_code ?? 0
+    telegramDescription = telegramBody?.description ?? ""
+    if (!telegram.ok || telegramBody?.ok !== true) {
+      return diagnostic({
+        stage: "telegram_response",
+        error: "Telegram rejected the request.",
+        telegramStatus,
+        telegramOk: false,
+        telegramErrorCode,
+        telegramDescription,
+        sentParts: index,
+      }, 502)
+    }
   }
 
-  let telegramBody: { ok?: boolean; error_code?: number; description?: string } | null = null
-  try {
-    telegramBody = await telegram.json()
-  } catch {
-    return diagnostic({
-      stage: "telegram_response",
-      error: "Telegram returned a response that was not valid JSON.",
-      telegramStatus: telegram.status,
-      telegramErrorCode: 0,
-      telegramDescription: "Invalid JSON response.",
-    })
-  }
-
-  const safeResponse = {
-    telegramStatus: telegram.status,
-    telegramOk: telegramBody?.ok ?? false,
-    telegramErrorCode: telegramBody?.error_code ?? 0,
-    telegramDescription: telegramBody?.description ?? "",
-  }
-  if (!telegram.ok || telegramBody?.ok !== true) {
-    return diagnostic({ stage: "telegram_response", error: "Telegram rejected the request.", ...safeResponse })
-  }
-
-  try {
-    return NextResponse.json({ success: true, ...safeResponse }, { status: 200 })
-  } catch {
-    return diagnostic({ stage: "success_handling", error: "Telegram succeeded, but the success response could not be returned." })
-  }
+  return NextResponse.json({
+    success: true,
+    telegramStatus,
+    telegramOk: true,
+    telegramErrorCode,
+    telegramDescription,
+    sentParts: chunks.length,
+  }, { status: 200 })
 }
 
 export const runtime = "nodejs"
