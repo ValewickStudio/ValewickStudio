@@ -251,8 +251,8 @@ export async function POST(request: Request) {
   const chunks: string[] = []
   let remaining = message
   while (remaining.length > 3900) {
-    let splitAt = remaining.lastIndexOf("\\n\\n", 3900)
-    if (splitAt < 1800) splitAt = remaining.lastIndexOf("\\n", 3900)
+    let splitAt = remaining.lastIndexOf("\n\n", 3900)
+    if (splitAt < 1800) splitAt = remaining.lastIndexOf("\n", 3900)
     if (splitAt < 1) splitAt = 3900
     chunks.push(remaining.slice(0, splitAt))
     remaining = remaining.slice(splitAt).trimStart()
