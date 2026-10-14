@@ -100,10 +100,23 @@ export function ProjectEnquiry() {
           honeypot: value("website"),
         }),
       })
-      if (!response.ok) throw new Error("Submission failed")
+      if (!response.ok) {
+        const result = await response.json().catch(() => null) as {
+          stage?: string
+          error?: string
+          validationIssues?: Array<{ message?: string }>
+        } | null
+        if (result?.stage === "validation" && result.validationIssues?.length) {
+          throw new Error(result.validationIssues[0].message || "Please check the required fields and try again.")
+        }
+        if (result?.stage === "environment") {
+          throw new Error("The enquiry service is not configured correctly yet. Please try again later.")
+        }
+        throw new Error("We couldn’t deliver your enquiry. Your details are still here—please try again.")
+      }
       setSubmitted(true)
-    } catch {
-      setError("We couldn’t send your enquiry. Your details are still here—please try again.")
+    } catch (submissionError) {
+      setError(submissionError instanceof Error ? submissionError.message : "We couldn’t send your enquiry. Your details are still here—please try again.")
     } finally {
       setIsSubmitting(false)
     }
